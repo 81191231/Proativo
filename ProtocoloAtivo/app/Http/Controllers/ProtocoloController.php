@@ -5,6 +5,7 @@ use PROATIVO\Http\Requests;
 use PROATIVO\Protocolo;
 use PROATIVO\destinatario;
 use PROATIVO\Emitente;
+use PROATIVO\Setor;
 use PROATIVO\Tipo_documento;
 use Illuminate\Support\Facades\DB;
 class ProtocoloController extends Controller{
@@ -13,8 +14,14 @@ class ProtocoloController extends Controller{
 	//Método Get da view
 	//!Funcionando Corretamente
 	public function listar(){ 
-			$protocolos = Protocolo::all();
-			if($protocolos != null){
+			$protocolos = DB::table('protocolos')
+            ->select('protocolos.*', 'emitentes.nome as enome', 'tipo_documentos.documento as tdocumento','setors.nome as snome','destinatarios.nome as dnome')
+            ->join('emitentes', 'protocolos.emitente_id', '=', 'emitentes.id')
+            ->join('tipo_documentos', 'protocolos.tipo_documento_id', '=', 'tipo_documentos.id')
+            ->join('setors', 'protocolos.setor_id', '=', 'setors.id')
+            ->join('destinatarios', 'protocolos.destinatario_id', '=', 'destinatarios.id')
+            ->get();
+			if(!empty($protocolos)){
 				return view('protocolo.listar',['protocolos'=>$protocolos],compact('msg'));	
 			}else{
 				$msg = '<div id="modal" class="alert alert-danger" role="alert">Nenhum protocolo existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
@@ -24,23 +31,19 @@ class ProtocoloController extends Controller{
 	}
 	//
 	//
-	public function baixa($id){
-		$protocolo = Protocolo::find($id);
+	public function baixa(Request $request,$id){
+		$input = Request::all();
+		$protocolo = Protocolo::find($id)->update();
 		return view('protocolo.baixa',compact('protocolo'));
 	}
 	//Método Get da view
 	//!Funcionando Corretamente
 	public function novo(){
-		try{
 			$destinatarios = destinatario::all();
 			$emitentes = Emitente::all();
 			$tipo_documentos = Tipo_documento::all();
-			return view('protocolo.novo',compact('emitentes','tipo_documentos'),['destinatarios'=>$destinatarios]);
-		}catch(Exception $e){
-			$msg = '<div id="modal" class="alert alert-danger" role="alert">Ocorreu um problema!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-			return view('errors.503',compact('msg'));
-		}
-		return;
+			$setors = Setor::all();
+		return view('protocolo.novo',compact('emitentes','setors', 'tipo_documentos'),['destinatarios'=>$destinatarios]);
 	}
 	//Método Get da view
 	//!Funcionando Corretamente
@@ -57,28 +60,44 @@ class ProtocoloController extends Controller{
   	//Método Get da view
 	//!Funcionando Parcialmente
 	public function store(Request $request){
-		$msg = null;
-		try{
 			$input = $request->all();
 			Protocolo::create($input);
 			$msg = '<div id="modal" class="alert alert-success" role="alert">Protocolo gerado com sucesso!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-		}
-		catch(Exception $ex){
-			$msg = '<div id="modal" class="alert alert-danger" role="alert">Erro ao gerar o protocolo!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div></div>';
-		}
-		return view('protocolo.novo',compact('msg'));
+			$destinatarios = destinatario::all();
+			$emitentes = Emitente::all();
+			$tipo_documentos = Tipo_documento::all();
+			$setors = Setor::all();
+		return view('protocolo.novo',compact('emitentes','msg','setors', 'tipo_documentos'),['destinatarios'=>$destinatarios]);
 	}
 	//Método Get da view
 	//!Funcionando Parcialmente	
 	public function editar($id){
 		$protocolo = Protocolo::find($id);
-		return view('protocolo.editar', compact('protocolo')); 
+		$emitentes = Emitente::all();
+		$destinatarios = destinatario::all();
+		$setors = setor::all();
+		$tipo_documentos = Tipo_documento::all();
+		return view('protocolo.editar', compact('setors','tipo_documentos','destinatarios','emitentes'),['protocolo'=>$protocolo]);
 	}
 	//
 	//
 	public function comprovante($id){
 		$protocolo = Protocolo::find($id);
-		return view('comprovante',compact('protocolo'));
+		$emitentes = Emitente::all();
+		$destinatarios = destinatario::all();
+		$setors = setor::all();
+		$tipo_documentos = Tipo_documento::all();
+		/*
+        $e_id = $protocolo->get('emitente_id');
+        $emitente = Emitente::find($e_id);
+        $d_id = $protocolo->get('destinatario_id');
+        $destinatario = destinatario::find($d_id);
+        $s_id = $protocolo->get('setor_id');
+        $setor = Setor::find($s_id);
+        $t_id = $protocolo->get('tipo_documento_id');
+        $Tipo_documento = Tipo_documento::find($t_id);
+        */
+		return view('comprovante',compact('setors','Tipo_documentos','destinatarios','emitentes'),['protocolo'=>$protocolo]);
 	}
 	//
 	//

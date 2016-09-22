@@ -13,11 +13,11 @@ class Setor extends Migration
     public function up()
     {
         //
-        Schema::create('Setores', function (Blueprint $table) {
+        Schema::create('Setors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('descricao');
-            $table->enum('status', array('Ativo', 'Inativo'));
+            $table->string('inf_adicionais');
+            $table->enum('status', array('Ativo', 'Inativo'))->default('Ativo');
             $table->timestamps();
         });
     }

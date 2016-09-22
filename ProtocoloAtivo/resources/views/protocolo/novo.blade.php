@@ -1,17 +1,7 @@
 <!-- page content Pagina de Formulario -->
 @extends('template')
 @section('content')
-<script type="text/javascript">
-function disableElement() {
-  document.getElementById("GerarProtocolo").disabled = true;
-}
-function disableElement() {
-  document.getElementById("confirm").disabled = true;
-}
-function addDocumento(){
-  
-}
-</script>
+
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
@@ -33,13 +23,11 @@ function addDocumento(){
         <div class="x_title">
           <h2>Novo Protocolo<small></small></h2>
           <div class="clearfix"></div>
-        </div>
-        <?php 
-        if(isset($msg)){
+        </div> 
+        <?php
+        if(!empty($msg)){
           echo $msg;
-        } 
-        ?>
-        
+        } ?>
         <div class="x_content">
           {!! Form::open(['url'=>'Protocolo/Store'],['name'=>'protocolo'])!!}
           <div class="form-horizontal form-label-left" novalidate>
@@ -49,70 +37,100 @@ function addDocumento(){
           <div class="item form-group" style="font-size:10px; color:red;"><p>* Campos obrigatórios</p></div>
 
           <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="destinatario">Destinatário:</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <select class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="destinatario" required="required">
-                <option value="">Selecione o destinatário</option>
-                @foreach($destinatarios as $destinatario)
-                <option value="{{$destinatario->nome}}">{{$destinatario->nome}}</option>
-                @endforeach
-              </select>
+            @if(!empty($destinatarios))
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Destinatario">Destinatário:</label>
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="Digite um documento" name="destinatario_id" class="chosen-select" style="width:580px;">
+                  @foreach($destinatarios as $destinatario)
+                  <option value="{{$destinatario->id}}">{{$destinatario->nome}}</option>
+                  @endforeach
+                </select>
+              </div>
             </div>
             <span class="required">*</span>
+            @else
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="alert alert-danger" role="alert">Nenhum destinatário existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            </div>
+            @endif
           </div>
 
           <div class="item form-group">
+            @if(!empty($emitentes))
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente">Emitente:</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <select class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="emitente" required="required" placeholder="Escolha um emitente">
-                <option value="">Selecione o emitente</option>
-                @foreach($emitentes as $emitente)
-                <option value="{{$emitente->nome}}">{{$emitente->nome}}</option>
-                @endforeach
-              </select>
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="" name="emitente_id" class="chosen-select"style="width:580px;">
+                  @foreach($emitentes as $emitente)
+                  <option value="{{$emitente->id}}">{{$emitente->nome}}</option>
+                  @endforeach
+                </select>
+              </div>
             </div>
             <span class="required">*</span>
+            @else
+            <div id="modal" class="alert alert-danger" role="alert">Nenhum emitente existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            @endif
           </div>
           <div id="tDocumento" class="item form-group">
           </div>
-          <!--Adicionar Documento -->
-            <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Tipo_documento">Documento:</label>
-              <div class="col-md-6 col-sm-6 col-xs-12" id="DocumentoAdd">
-                <select class="form-control col-md-7 col-xs-12" name="tipo_documento">
-                  <option value="">Selectione um documento</option>
-                  @foreach($tipo_documentos as $tipo_documento)
-                  <option value="{{$tipo_documento->documento}}">{{$tipo_documento->documento}}</option>
+          <div class="item form-group">
+            @if(!empty($setors))
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento">Setor:</label>
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="Digite um documento" name="setor_id" class="chosen-select" style="width:580px;">
+                  @foreach($setors as $setor)
+                  <option value="{{$setor->id}}">{{$setor->nome}}</option>
                   @endforeach
-                </select><br>
+                </select>
               </div>
-              <span class="required">*</span>
             </div>
-            <br>
-          <div class="item form-group">
-            <button class="btn btn-default" onclick="addDocumento()">Adicionar outro documento</button>
-          </div>
-          <br>
-          <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Complemento:</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <textarea id="textarea"name="inf_adicionais" class="form-control col-md-7 col-xs-12"></textarea>
-            </div>
-          </div>
-
-          <div class="ln_solid"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-md-offset-3">
-              <button id="send" type="reset" class="btn btn-primary">Limpar</button>
-              <button type="submit" class="btn btn-success" id="GerarProtocolo" onclick="HTMLElementObject.disabled=true;">Gerar Protocolo</button>
-            </div>
+          <span class="required">*</span>
+          @else
+          <div id="modal" class="alert alert-danger" role="alert">Nenhum setor existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+          @endif
+        </div>
+        <!--Adicionar Documento -->
+        <div class="item form-group">
+          @if(!empty($tipo_documentos))
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Tipo_documento">Documento:</label> <div class="chosen-container chosen-container-multi" title="">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <select data-placeholder="Digite um documento" name="tipo_documento_id" class="chosen-select" multiple style="width:580px;">
+              @foreach($tipo_documentos as $tipo_documento)
+              <option value="{{$tipo_documento->id}}">{{$tipo_documento->documento}}</option>
+              @endforeach
+            </select>
           </div>
         </div>
-        {!! Form::close()!!}
+        <span class="required">*</span>
+        @else
+        <div id="modal" class="alert alert-danger" role="alert">Nenhum tipo de documento existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+        @endif
+      </div>
+      <br>
+      <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Complemento:</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <textarea id="textarea"name="inf_adicionais" class="form-control col-md-7 col-xs-12"></textarea>
+        </div>
+      </div>
+
+      <div class="ln_solid"></div>
+      <div class="form-group">
+        <div class="col-md-6 col-md-offset-3">
+          <button id="send" type="reset" class="btn btn-primary">Limpar</button>
+          <button type="submit" class="btn btn-success" id="GerarProtocolo" onclick="HTMLElementObject.disabled=true;">Gerar Protocolo</button>
+        </div>
       </div>
     </div>
+    {!! Form::close()!!}
   </div>
 </div>
 </div>
 </div>
-        @endsection
+</div>
+</div>
+ 
+@endsection

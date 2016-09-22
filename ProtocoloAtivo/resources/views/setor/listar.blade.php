@@ -5,7 +5,7 @@
   <div>
     <div class="page-title">
       <div class="title_left">
-        <h3>Tipo de Documento</h3>
+        <h3>Setor</h3>
       </div>
 
       <div class="title_right">
@@ -26,7 +26,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Lista de Tipos de Documentos<small></small></h2>
+            <h2>Lista de Setores<small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -52,9 +52,10 @@
 
                 <!--Label da Tabela-->
                 <thead>
-                  <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Id</th>
-                  <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Tipo</th>
+                  <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Status</th>
+                  <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Nome</th>
                   <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Descrição</th>
+                  <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Ações</th>
                 </tr>
               </thead>
               <!--final do Label da Tabela-->
@@ -62,14 +63,14 @@
               <tbody>
 
                 <!--Inicio de Tabela com Valores-->
-                @foreach($tipo_documentos as $tipo_documento)
+                @foreach($setors as $setor)
                 <!--linha da Tabela-->
                 <tr class="odd" role="row">
-                  <td>{{$tipo_documento->id}}</td>
-                  <td>{{$tipo_documento->documento}}</td>
-                  <td>{{$tipo_documento->descricao}}</td>
-                  <td><a href="{{URL::to('TipoDocumento/'.$tipo_documento->id.'/Editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">Editar</a>
-                    <a class="btn btn-success" href="{{URL::to('TipoDocumento/'.$tipo_documento->id.'/Protocolos')}}" data-toggle="tooltip" data-placement="top" title="Protocolos Gerados">Protocolos gerados</a>
+                  <td>{{$setor->status}}</td>
+                  <td>{{$setor->nome}}</td>
+                  <td>{{$setor->inf_adicionais}}</td>
+                  <td><a href="{{URL::to('Setor/'.$setor->id.'/Editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">Editar</a>
+                    <a class="btn btn-success" href="{{URL::to('Setor/'.$setor->id.'/Protocolos')}}" data-toggle="tooltip" data-placement="top" title="Protocolos Gerados">Protocolos gerados</a>
                   </td> 
                 </tr>
                 <!--Fim linha da Tabela-->

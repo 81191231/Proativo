@@ -53,8 +53,8 @@
 
                 <!--Label da Tabela-->
                 <thead>
-                  <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Código</th>
                   <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Nome</th>
+                  <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Email</th>
                   <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Setor</th>
                   <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Informações Adicionais</th>
                   <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Ações</th>                  
@@ -69,9 +69,9 @@
                 @foreach($emitentes as $emitente)
                 <!--linha da Tabela-->
                 <tr class="odd" role="row">
-                  <td>{{$emitente->id}}</td>
                   <td>{{$emitente->nome}}</td>
-                  <td>{{$emitente->setor}}</td>
+                  <td>{{$emitente->email}}</td>
+                  <td>{{$emitente->snome}}</td>
                   <td>{{$emitente->inf_adicionais}}</td>
                   <td><a href="{{URL::to('Emitente/'.$emitente->id.'/Editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">Editar</a>
                       <a class="btn btn-success" href="{{URL::to('Emitente/'.$emitente->id.'/Protocolos')}}" data-toggle="tooltip" data-placement="top" title="Protocolos Gerados">Protocolos gerados</a>

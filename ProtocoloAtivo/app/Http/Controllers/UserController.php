@@ -22,4 +22,8 @@ class UserController extends Controller{
         });
         return Redirect::to('form');
       }
+    public function updatePerfil(Request $request){
+      $input = Request::all();
+      
+    }
 }

@@ -5,7 +5,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Emitente</h3>
+        <h3>  Emitente</h3>
       </div>
 
       <div class="title_right">
@@ -26,7 +26,7 @@
         <?php 
         if(isset($msg)){
           echo $msg;
-        } 
+        }
         ?>
         <div class="x_content">
 
@@ -50,18 +50,21 @@
           </div>
 
           <div class="item form-group">
-            <label for="setor" class="control-label col-md-3 col-sm-3 col-xs-12">Setor:</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <select name="setor" class="form-control col-md-7 col-xs-12" required="required">
-                <option active>Selecione um Setor</option>
-                <option>Finanças</option>
-                <option>RH</option>
-                <option>Marketing</option>
-                <option>Produção</option>
-                <option>Outro</option>
-              </select>
+            @if(!empty($setors))
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento">Setor:</label>
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="Digite um documento" name="setor_id" class="chosen-select" style="width:580px;">
+                  @foreach($setors as $setor)
+                  <option value="{{$setor->id}}">{{$setor->nome}}</option>
+                  @endforeach
+                </select>
+              </div>
             </div>
-            <span class="required">*</span>
+          <span class="required">*</span>
+          @else
+          <?php echo'<div id="modal" class="alert alert-danger" role="alert">Nenhum setor existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'?>
+          @endif
           </div>
           <div class="item form-group">
             {!! Form::label('inf_adicionais','Informações adicionais:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}

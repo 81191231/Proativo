@@ -32,6 +32,10 @@ Route::post('Protocolo/Busca', 'ProtocoloController@pesquisa');
 
 Route::get('Protocolo/Buscar', 'ProtocoloController@vBuscar');
 
+Route::get('Perfil', 'UserController@perfil');
+
+Route::post('Perfil/update', 'UserController@updateperfil');
+
 //Rotas do controlador Protocolo
 Route::get('Protocolo/Listar','ProtocoloController@listar');
 

@@ -7,6 +7,7 @@
       <div class="title_left">
         <h3>Protocolo</h3>
       </div>
+
       <div class="title_right">
         <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
           <div class="input-group">
@@ -14,7 +15,8 @@
           </div>
         </div>
       </div>
-    
+    </div>
+
     <div class="clearfix"></div>
 
     <div class="row">
@@ -31,8 +33,10 @@
             <div class="clearfix"></div>
           </div>
           <?php 
-          if(!empty($msg)){
+          if(isset($msg)){
             echo $msg;
+          }if(isset($protocoloP)){
+            echo $protocoloP;
           }
           ?>
           <div class="x_content">
@@ -51,12 +55,12 @@
                 <thead>
                   <tr>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Status</th>
+                    <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Código</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Destinatário</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Emitente</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Tipo do Documento</th>
-                    <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Setor</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Recebedor</th>
-                    <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Data e hora de Emissão</th>
+                    <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Data de Emissão</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Data de Recebimento</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Informações Adicionais</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="3">Ações</th>
@@ -68,30 +72,30 @@
 
                   <!--Inicio de Tabela com Valores-->
 
-                  @foreach($protocolos as $protocolo)
+                  @foreach($emitentesProtocolos as $emitentesProtocolo)
                   <!--linha da Tabela-->
                   <tr class="odd" role="row">
                     <td>
-                      <?php if($protocolo->status==0){
+                      <?php if($emitentesProtocolo->status==0){
                         echo '<span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Emitido"></span>';
-                      }else if($protocolo->status==1){
+                      }else if($emitentesProtocolo->status==1){
                        echo '<span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enviado"></span>';
-                     }else if($protocolo->status==2){
+                     }else if($emitentesProtocolo->status==2){
                        echo '<span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Entregue"></span>';
-                     }else if($protocolo->status==3){
+                     }else if($emitentesProtocolo->status==3){
                        echo '<span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Cancelado"></span>';
                      }else{
                        echo '<span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Arquivado"></span>';
                      }?>
                    </td>
-                   <td>{{$protocolo->dnome}}</td>
-                   <td>{{$protocolo->enome}}</td>
-                   <td>{{$protocolo->tdocumento}}</td>
-                   <td>{{$protocolo->snome}}</td>
-                   <td>{{$protocolo->recebedor}}</td>
-                   <td>{{$protocolo->created_at}}</td>
-                   <td>{{$protocolo->data_hora_recebimento}}</td>
-                   <td>{{$protocolo->inf_adicionais}}</td>
+                   <td>{{$emitentesProtocolo->id}}</td>
+                   <td>{{$emitentesProtocolo->destinatario}}</td>
+                   <td>{{$emitentesProtocolo->emitente}}</td>
+                   <td>{{$emitentesProtocolo->tipo_documento}}</td>
+                   <td>{{$emitentesProtocolo->recebedor}}</td>
+                   <td>{{$emitentesProtocolo->created_at}}</td>
+                   <td>{{$emitentesProtocolo->data_hora_recebimento}}</td>
+                   <td>{{$emitentesProtocolo->inf_adicionais}}</td>
                    <td><a href="{{URL::to('Protocolo/'.$protocolo->id.'/Editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">Editar</a>
                    <a class="btn btn-danger" href="{{URL::to('Protocolo/'.$protocolo->id.'/Cancelamento')}}" data-toggle="tooltip" data-placement="top" title="Cancelar">Cancelar</a>
                    <a href="{{URL::to('Protocolo/'.$protocolo->id.'/comprovante')}}" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Documento">Documento</a>

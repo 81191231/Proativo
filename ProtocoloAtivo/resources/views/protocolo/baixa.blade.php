@@ -1,5 +1,11 @@
 @extends('template')
 @section('content')
+<script>
+function myFunction() {
+    var x = document.getElementById("mFile");
+    x.disabled = true;
+}
+</script>
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
@@ -96,6 +102,13 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Descrição do Protocolo:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <textarea id="textarea" name="inf_adicionais" value="{{$protocolo->inf_adicionais}}" class="form-control col-md-7 col-xs-12"></textarea>
+          </div>
+        </div>
+
+        <div class="item form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Inserir Documento:</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="file" id="mFile" name="documento" name="inf_adicionais" class="form-control col-md-7 col-xs-12">
           </div>
         </div>
 

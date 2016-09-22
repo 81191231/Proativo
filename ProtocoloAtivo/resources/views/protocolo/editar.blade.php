@@ -19,7 +19,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Novo Protocolo<small></small></h2>
+          <h2>Edição de Protocolo<small></small></h2>
          @if ($errors->any())
          <ul class="alert alert-warning">
          @foreach($errors->all() as $error)
@@ -52,22 +52,71 @@
 
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente">Emitente:</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="search" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="emitente" value="{{$protocolo->emitente}}" required="required" disabled="disabled">
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="" name="emitente_id" class="chosen-select"style="width:580px;">
+                  @foreach($emitentes as $emitente)
+                  @if($emitente->id===$protocolo->emitente_id)
+                  <option value="{{$protocolo->emitente_id}}" active>{{$emitente->nome}}</option>
+                  @else
+                  <option value="{{$emitente->id}}">{{$emitente->nome}}</option>
+                  @endif
+                  @endforeach
+                </select>
+              </div>
             </div>
+          
           </div>
           
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Destinatario">Destinatário:</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="search" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="destinatario" value="{{$protocolo->destinatario}}" required="required" disabled="disabled">
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="Digite um documento" name="destinatario_id" class="chosen-select" style="width:580px;">
+                  @foreach($destinatarios as $destinatario)
+                  @if($destinatario->id===$protocolo->destinatario_id)
+                  <option value="{{$protocolo->destinatario_id}}" active>{{$destinatario->nome}}</option>
+                  @else
+                  <option value="{{$destinatario->id}}">{{$destinatario->nome}}</option>
+                  @endif
+                  @endforeach
+                </select>
+              </div>
             </div>
           </div>
 
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento">Tipo de Documento:</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="search" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tipo_documento" value="{{$protocolo->tipo_documento}}" required="required">
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="Digite um documento" name="tipo_documento_id" class="chosen-select" multiple style="width:580px;">
+                  @foreach($tipo_documentos as $tipo_documento)
+                  @if($tipo_documento->id===$protocolo->tipo_documento_id)
+                  <option value="{{$protocolo->tipo_documento_id}}" active>{{$tipo_documento->documento}}</option>
+                  @else
+                  <option value="{{$tipo_documento->id}}">{{$tipo_documento->documento}}</option>
+                  @endif
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          
+          </div>
+
+          <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento">Setor:</label>
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="Digite um documento" name="setor_id" class="chosen-select" style="width:580px;">
+                  @foreach($setors as $setor)
+                  @if($setor->id===$protocolo->setor_id)
+                  <option value="{{$protocolo->setor_id}}" active>{{$setor->nome}}</option>
+                  @else
+                  <option value="{{$setor->id}}">{{$setor->nome}}</option>
+                  @endif
+                  @endforeach
+                </select>
+              </div>
             </div>
           </div>
 
@@ -115,10 +164,21 @@
 </div>
 </div>
 </div>
-
-
-
-
-
+<script src="{{URL::asset('lib/chosen.jquery.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('lib/prism.js')}}" type="text/javascript" charset="utf-8"></script>
+ <link href="{{URL::asset('lib/css.css')}}" rel="stylesheet"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('lib/chosen.css')}}">
+  <script type="text/javascript">
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+  </script>
 <!--fim de Formulario-->
 @endsection

@@ -16,14 +16,14 @@
 
 		<p>DATA DE EMISSÃO: {{$protocolo->created_at}}</p>
 
-		<p>SETOR DE EMISSÃO: </p>
+		<p>SETOR DE EMISSÃO: {{$protocolo->snome}}</p>
 
 		<p>RESPONSÁVEL DO SETOR: </p>
 
-		<p>DESTINO: {{$protocolo->destinatario}}</p>
+		<p>DESTINO: {{$protocolo->dnome}}</p>
 		<hr>
 
-			<p>TIPO DE DOCUMENTO: {{$protocolo->tipo_documento}}</p><br>
+			<p>TIPO DE DOCUMENTO: {{$protocolo->tdocumento}}</p><br>
 		<hr>
 		<p>DESCRIÇÃO ANALÍTICA DO DOCUMENTO: {{$protocolo->inf_adicionais}}</p><br>
 		<hr>

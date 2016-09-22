@@ -57,4 +57,10 @@ class SetorController extends Controller{
 		$setor = Setor::find($id);
 		return view('setor.editar', compact('setor')); 
 	}
+	//
+	//
+	public function buscarProtocolos($id){
+		$setor = Protocolos::all()->where('setor_id',$id);
+		return view('setor.editar', compact('setor')); 
+	}
 }

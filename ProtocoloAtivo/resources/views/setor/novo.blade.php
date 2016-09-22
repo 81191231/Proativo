@@ -30,23 +30,23 @@
         ?>
         <div class="x_content">
 
-          {!! Form::open(['url'=>'Tipo_Documento/Cadastro'],['name'=>'tipo_documento']) !!}  
+          {!! Form::open(['url'=>'Setor/Store'],['name'=>'setor']) !!}  
           <div class="form-horizontal form-label-left" novalidate>
             
           </p>
           <span class="section">Inserir informações</span>
           <div class="item form-group">
-            {!! Form::label('documento','Tipo do Documento:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
+            {!! Form::label('documento','Nome:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              {!! Form::text('documento', null,['class' =>'form-control col-md-7 col-xs-12','required'=>'required']) !!}
+              {!! Form::text('nome', null,['class' =>'form-control col-md-7 col-xs-12','required'=>'required']) !!}
             </div>
           </div>
 
           <div class="item form-group">
-            {!! Form::label('descricao','Descrição do documento:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
+            {!! Form::label('descricao','Descrição do setor:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            {!! Form::textarea('descricao', null,['class' =>'form-control col-md-7 col-xs-12']) !!}
+            {!! Form::textarea('inf_adicionais', null,['class' =>'form-control col-md-7 col-xs-12']) !!}
           </div>
         </div>
 

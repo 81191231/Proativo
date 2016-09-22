@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tipo_documento extends Model
 {
     //
-    protected $fillable = [
-        'documento','descricao'
-    ];
+    protected $fillable = ['documento','descricao'];
 
     public function protocolo_documento(){
     	//
