@@ -3,17 +3,11 @@
 use Illuminate\Database\Eloquent\Model;
 use PROATIVO\Tipo_documento;
 use PROATIVO\Setor;
+use PROATIVO\destinatario;
+use PROATIVO\Emitente;
 class Protocolo extends Model
 {
     //
-    protected $fillable = ['destinatario_id','tipo_documento_id','emitente_id','setor_id','inf_adicionais'];
-
-   	public function tipo_documento(){
-    	//
-    	return $this->hasMany('app/Tipo_documento');
-    }
-    public function setor(){
-        //
-        return $this->hasMany('app/Setor');
-    }
+    protected $fillable = ['id','status','recebedor','data_hora_recebimento','inf_adicionais', 'motivo'];
+    protected $tdocumento =['tipo_documento'=>'array'];
 }

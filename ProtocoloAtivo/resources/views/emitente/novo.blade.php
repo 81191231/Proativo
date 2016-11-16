@@ -22,69 +22,69 @@
         <div class="x_title">
           <h2>Novo Emitente<small></small></h2>
           <div class="clearfix"></1div>
-        </div>
-        <?php 
-        if(isset($msg)){
-          echo $msg;
-        }
-        ?>
-        <div class="x_content">
-
-          {!! Form::open(['url'=>'Emitente/Store']) !!}  
-          <div class="form-horizontal form-label-left" novalidate>
-            
-          </p>
-          <span class="section">Inserir informações</span>
-          <div class="item form-group">
-            {!! Form::label('nome','Nome:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              {!! Form::text('nome', null,['class' =>'form-control col-md-7 col-xs-12','required'=>'required']) !!}
-            </div>
           </div>
-          <div class="item form-group">
-            {!! Form::label('email','Email:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              {!! Form::email('email', null,['class' =>'form-control col-md-7 col-xs-12','required'=>'required']) !!}
-            </div>
-            <span class="required">*</span>
-          </div>
+          @if(!empty($msg))
+            {!! $msg !!}
+          @else
+          
+          @endif
+          <div class="x_content">
 
-          <div class="item form-group">
-            @if(!empty($setors))
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento">Setor:</label>
-             <div class="chosen-container chosen-container-multi" title="">
+            {!! Form::open(['url'=>'Emitente/Store']) !!}  
+            <div class="form-horizontal form-label-left" novalidate>
+              
+            </p>
+            <span class="section">Inserir informações</span>
+            <div class="item form-group">
+              {!! Form::label('nome','Nome:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select data-placeholder="Digite um documento" name="setor_id" class="chosen-select" style="width:580px;">
-                  @foreach($setors as $setor)
-                  <option value="{{$setor->id}}">{{$setor->nome}}</option>
-                  @endforeach
-                </select>
+                {!! Form::text('nome', null,['class' =>'form-control col-md-7 col-xs-12','required'=>'required']) !!}
               </div>
             </div>
-          <span class="required">*</span>
-          @else
-          <?php echo'<div id="modal" class="alert alert-danger" role="alert">Nenhum setor existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'?>
-          @endif
+            <div class="item form-group">
+              {!! Form::label('email','Email:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                {!! Form::email('email', null,['class' =>'form-control col-md-7 col-xs-12','required'=>'required']) !!}
+              </div>
+              <span class="required">*</span>
+            </div>
+            @if(!empty($setors))
+            <div class="item form-group">
+              
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento">Setor:</label>
+              <div class="chosen-container chosen-container-multi" title="">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select data-placeholder="Digite um documento" name="setor" class="chosen-select" style="width:580px;">
+                    @foreach($setors as $setor)
+                    <option value="{{$setor->nome}}">{{$setor->nome}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <span class="required">*</span>
+              @else
+              <div id="modal" class="alert alert-danger" role="alert">Nenhum setor existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+              @endif
+            </div>
+            <div class="item form-group">
+              {!! Form::label('inf_adicionais','Informações adicionais:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              {!! Form::textarea('inf_adicionais', null,['class' =>'form-control col-md-7 col-xs-12']) !!}
+            </div>
           </div>
-          <div class="item form-group">
-            {!! Form::label('inf_adicionais','Informações adicionais:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            {!! Form::textarea('inf_adicionais', null,['class' =>'form-control col-md-7 col-xs-12']) !!}
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-6 col-md-offset-3">
+              <button id="send" type="submit" class="btn btn-primary">Limpar</button>
+              {!! Form::submit('Cadastrar', ['class'=>'btn btn-success'],['accesskey'=>'c']) !!} 
+            </div>
           </div>
         </div>
-        <div class="ln_solid"></div>
-        <div class="form-group">
-          <div class="col-md-6 col-md-offset-3">
-          <button id="send" type="submit" class="btn btn-primary">Limpar</button>
-          {!! Form::submit('Cadastrar', ['class'=>'btn btn-success'],['accesskey'=>'c']) !!} 
-         </div>
-       </div>
-     </div>
-     {!! Form::close() !!} 
-   </div>
- </div>
-</div>
+        {!! Form::close() !!} 
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 </div>

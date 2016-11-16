@@ -17,9 +17,7 @@ class Emitente extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('email')->unique();
-            //
-            $table->integer('setor_id')->unsigned();
-            $table->foreign('setor_id')->references('id')->on('Setors');  
+            $table->string('setor');  
             $table->string('inf_adicionais');
             $table->timestamps();
         });

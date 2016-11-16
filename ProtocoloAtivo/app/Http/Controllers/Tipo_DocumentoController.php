@@ -3,34 +3,48 @@ use Illuminate\Http\Request;
 use PROATIVO\Http\Requests;
 use PROATIVO\Tipo_documento;
 class Tipo_DocumentoController extends Controller{
-	//
-	//
-	public function cadastroDocumento(Request $request){
-		try{
-			$input = $request->all();
-			//$bdsearch = Tipo_documento::find($input);
-			//if($bdsearch===null){
-			Tipo_documento::create($input);
-			$msg = '<div id="modal" class="alert alert-success" role="alert">Tipo de documento cadastrado com sucesso!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-			//}else{
-			//$msg = '<div id="modal" class="alert alert-success" role="alert">Tipo de documento já existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-			//}
-			return view('Tipo_documento.novo',compact('msg'));
+
+	public function store(Request $request){
+		$input = $request->all();
+		
+		if(Tipo_documento::create($input)){
+			$msg = 'sucesso';	
+			
+		}else{
+			$msg = 'existente';
 		}
-		catch(Exception $ex){
-			$msg = '<div id="modal" class="alert alert-danger" role="alert">Erro ao cadastrar novo tipo de doucmento!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div></div>';
+		return view('Tipo_documento.novo',compact('msg'));
+	}
+
+	public function listar(){ 
+		$tipo_documentos = Tipo_documento::all();
+		if(empty($tipo_documentos)){
+			$msg = 'nenhum';	
+		}
+		return view('tipo_documento.listar',compact('tipo_documentos','msg'));
+	}
+
+	public function deletar($id){ 
+		$tp = Tipo_documento::find($id);
+		if($tp!=""){
+		if(Tipo_documento::find($id)->delete()){
+			$msg = 'sucesso';
+			return redirect()->action('Tipo_DocumentoController@listar');
+		}
+	}else{
+			$msg = 'Erro! Não é possível editar o tipo de documento:'.$id;
+			return view('errors.503',compact('msg'));
 		}
 		return;
 	}
-	//
-	//
-	public function listar(){ 
-		$msg = null;
-		try{
-			$tipo_documentos = Tipo_documento::all(); 
-			return view('tipo_documento.listar',['tipo_documentos'=>$tipo_documentos]);
-		}catch(Exception $e){
-			$msg = '<div id="modal" class="alert alert-danger" role="alert">Nenhum tipo de documento existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+
+	public function update(Request $req,$id){ 
+		$tipo_documento = Tipo_documento::find($id)->update($req->all());
+		if(!empty($tipo_documento)){
+			return redirect()->action('Tipo_DocumentoController@listar');
+		}else{
+			$msg = 'Erro! Não é possível editar o tipo de documento:'.$id;
+			return view('errors.503',compact('msg'));
 		}
 		return;
 	}

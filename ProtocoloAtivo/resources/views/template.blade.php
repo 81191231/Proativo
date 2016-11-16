@@ -69,7 +69,6 @@
                 <li><a><i class="fa fa-home"></i> Inicio <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="{{URL::asset('/')}}">Pagina Inicial</a></li>
-                    <li><a href="{{URL::asset('Emitente/Novo')}}" alt="Novo Emitente" accesskey="u" data-toggle="tooltip" data-placement="right" title="Alt+U">Novo Usuário</a></li>
                     <li><a href="#">Sair</a></li>
                   </ul>
                 </li>
@@ -78,7 +77,7 @@
                 <li><a><i class="fa fa-edit"></i> Protocolo <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="{{URL::asset('Protocolo/Novo')}}" alt="Novo Protocolo = " accesskey="P" data-toggle="tooltip" data-placement="right" title="Alt+P">Novo</a></li>
-                    <li><a href="{{URL::asset('Protocolo/Buscar')}}" alt="Buscar Protocolo" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+2">Buscar</a></li>
+                    <!-- <li><a href="{{URL::asset('Protocolo/Buscar')}}" alt="Buscar Protocolo" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+2">Buscar</a></li>-->
                     <li><a href="{{URL::asset('Protocolo/Listar')}}" alt="Listar Protocolos" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+3">Listar</a></li>
                   </ul>
                 </li>
@@ -86,7 +85,10 @@
                 <!--Menu do Emitente-->
                 <li><a><i class="fa fa-envelope-o"></i> Emitente <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
+                  <li><a href="{{URL::asset('Emitente/Novo')}}" alt="Novo Emitente" accesskey="u" data-toggle="tooltip" data-placement="right" title="Alt+U">Novo</a></li>
+                  <!--
                     <li><a href="{{URL::asset('Emitente/Buscar')}}"alt="Editar Emitente" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+5">Buscar</a></li>
+                  -->
                     <li><a href="{{URL::asset('Emitente/Listar')}}" alt="Listar Emitente" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+6">Listar</a></li>
                   </ul>
                 </li>
@@ -103,7 +105,9 @@
                 <li><a><i class="fa fa-location-arrow"></i> Destinatário <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="{{URL::asset('Destinatario/Novo')}}" alt="Novo Destinatário" accesskey="D" data-toggle="tooltip" data-placement="right" title="Alt+D">Novo</a></li>
+                    <!--
                     <li><a href="{{URL::asset('Destinatario/Buscar')}}" alt="Editar Destinatário" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+8">Buscar</a></li>
+                    -->
                     <li><a href="{{URL::asset('Destinatario/Listar')}}" alt="Listar Destinatário" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+9">Listar</a></li>
 
                   </ul>
@@ -112,8 +116,8 @@
                 <!--Menu do Tipo de Documento-->
                 <li><a><i class="glyphicon glyphicon-file"></i> Tipo de Documento <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="{{URL::asset('Tipo_documento/Novo')}}" alt="Novo Destinatário" accesskey="T" data-toggle="tooltip" data-placement="right" title="Alt+T">Novo</a></li>
-                    <li><a href="{{URL::asset('Tipo_documento/Listar')}}" alt="Listar Destinatário" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+r">Listar</a></li>
+                    <li><a href="{{URL::asset('Tipo_Documento/Novo')}}" alt="Novo Destinatário" accesskey="T" data-toggle="tooltip" data-placement="right" title="Alt+T">Novo</a></li>
+                    <li><a href="{{URL::asset('Tipo_Documento/Listar')}}" alt="Listar Destinatário" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+r">Listar</a></li>
                   </ul>
                 </li>
 

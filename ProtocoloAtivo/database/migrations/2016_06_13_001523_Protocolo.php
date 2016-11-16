@@ -14,25 +14,17 @@ class Protocolo extends Migration
     //
     Schema::create('protocolos', function(Blueprint $table){
         $table->increments('id');
-        $table->enum('status', array('Emitido', 'Entregue', 'Enviado', 'Cancelado', 'Em Espera'))->default('Emitido');
-        //
+        $table->enum('status', array('Emitido', 'Entregue', 'Cancelado'))->default('Emitido');
+        $table->integer('user_id')->unsigned();
+        $table->foreign('user_id')->references('id')->on('users');
         $table->integer('destinatario_id')->unsigned();
-        $table->foreign('destinatario_id')->references('id')->on('Destinatarios');
-        //
-        $table->integer('emitente_id')->unsigned();
-        $table->foreign('emitente_id')->references('id')->on('Emitentes');
-        //foreign key Setores
-        $table->integer('setor_id')->unsigned();
-        $table->foreign('setor_id')->references('id')->on('Setors');
-        //
-        $table->string('recebedor')->default('Ainda não foi recebido');
-        //
+        $table->foreign('destinatario_id')->references('id')->on('destinatarios');
+        $table->string('recebedor')->default('Ainda não foi recebido');    
         $table->integer('tipo_documento_id')->unsigned();
-        $table->foreign('tipo_documento_id')->references('id')->on('Tipo_documentos');
-        //
-        $table->string('Documento')->default('Sem documento de entrega assinado');
+        $table->foreign('tipo_documento_id', array())->references('id')->on('Tipo_documentos');
+        $table->string('anexo_comprovante',array())->default('Nenhum Documento anexado');
         $table->string('data_hora_recebimento')->default('Documento ainda não foi entregue!');
-        $table->string('inf_adicionais');
+        $table->string('motivo');
         $table->timestamps();
     }); 
 

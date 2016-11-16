@@ -16,8 +16,6 @@ class Setor extends Migration
         Schema::create('Setors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('inf_adicionais');
-            $table->enum('status', array('Ativo', 'Inativo'))->default('Ativo');
             $table->timestamps();
         });
     }

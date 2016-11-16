@@ -4,39 +4,36 @@ use Illuminate\Http\Request;
 use PROATIVO\Http\Requests;
 use PROATIVO\Setor;
 class SetorController extends Controller{
-	//Este controller tem como finalidade o retorno apenas das view referentes 
-	//a ele
 	
-	//Método Get da view
-	//!Funcionando Corretamente
 	public function listar(){ 
-		//realiza o select no banco de dados e atribui a consulta a variável $Setors
+		
 		$setors = Setor::all(); 
 		return view('setor.listar',['setors'=>$setors]); 
 	}
-	//Method Get da view
+	
 	public function novo(){		
 		return view('setor.novo');
 	}
-	//Method Get da view
-	//!Funcionando Corretamente
+	
 	public function buscar(){		
 		return view('setor.editar');
 	}
-	//
-	//
+	public function delete($id){
+		Setor::delete($id);
+	}
+	
 	public function busca(SetorRequest $request, $nome){
 		$setors = Setor::find($nome);	
 		return view(['setor'=>$setors]);
 	}
- 	//Method Put da view 
- 	//!Funcionando Parcialmente
-	public function update(SetorRequest $request, $id){ 
-		$setor = Setor::find($id)->update($request->all());
-		return view('Setor.editar');
+ 	
+	public function update(Request $request, $id){ 
+		$input = $request->all();
+		Setor::find($id)->update($input);
+			$msg = '<div id="modal" class="alert alert-success" role="alert">Setor alterado com sucesso!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+		return redirect()->action('SetorController@listar');
 	}
-  	//Método Post da view que cria um novo Setor.
-  	//!Funcionando Corretamente
+  	
 	public function store(Request $request){
 		$msg = null;
 		try{
@@ -51,14 +48,12 @@ class SetorController extends Controller{
 		}
 		return view('Setor.novo',compact('msg'));
 	}
-	//Método Get da view retornando um Setor especificado pelo o id
-	//!Funcionando Parcialmente	
-	public function editar($id){
+	
+	public function editar(Request $request, $id){
 		$setor = Setor::find($id);
 		return view('setor.editar', compact('setor')); 
 	}
-	//
-	//
+	
 	public function buscarProtocolos($id){
 		$setor = Protocolos::all()->where('setor_id',$id);
 		return view('setor.editar', compact('setor')); 

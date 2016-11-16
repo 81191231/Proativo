@@ -38,12 +38,12 @@
 
           <div class="item form-group">
             @if(!empty($destinatarios))
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Destinatario">Destinatário:</label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Destinatario"><a href="{{URL::asset('Destinatario/Novo')}}">Destinatário:</a></label>
              <div class="chosen-container chosen-container-multi" title="">
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select data-placeholder="Digite um documento" name="destinatario_id" class="chosen-select" style="width:580px;">
+              <select data-placeholder="Digite um documento" name="destinatario" class="chosen-select" style="width:580px;">
                   @foreach($destinatarios as $destinatario)
-                  <option value="{{$destinatario->id}}">{{$destinatario->nome}}</option>
+                  <option value="{{$destinatario->nome}}">{{$destinatario->nome}}</option>
                   @endforeach
                 </select>
               </div>
@@ -58,12 +58,12 @@
 
           <div class="item form-group">
             @if(!empty($emitentes))
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente">Emitente:</label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente"><a href="{{URL::asset('Emitente/Novo')}}">Emitente:</a></label>
              <div class="chosen-container chosen-container-multi" title="">
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select data-placeholder="" name="emitente_id" class="chosen-select"style="width:580px;">
+              <select data-placeholder="" name="emitente" class="chosen-select"style="width:580px;">
                   @foreach($emitentes as $emitente)
-                  <option value="{{$emitente->id}}">{{$emitente->nome}}</option>
+                  <option value="{{$emitente->nome}}">{{$emitente->nome}}</option>
                   @endforeach
                 </select>
               </div>
@@ -77,12 +77,12 @@
           </div>
           <div class="item form-group">
             @if(!empty($setors))
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento">Setor:</label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento"><a href="{{URL::asset('Setor/Novo')}}">Setor:</a></label>
              <div class="chosen-container chosen-container-multi" title="">
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select data-placeholder="Digite um documento" name="setor_id" class="chosen-select" style="width:580px;">
+              <select data-placeholder="Digite um documento" name="setor" class="chosen-select" style="width:580px;">
                   @foreach($setors as $setor)
-                  <option value="{{$setor->id}}">{{$setor->nome}}</option>
+                  <option value="{{$setor->nome}}">{{$setor->nome}}</option>
                   @endforeach
                 </select>
               </div>
@@ -95,11 +95,11 @@
         <!--Adicionar Documento -->
         <div class="item form-group">
           @if(!empty($tipo_documentos))
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Tipo_documento">Documento:</label> <div class="chosen-container chosen-container-multi" title="">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Tipo_documento"><a href="{{URL::asset('Tipo_Documento/Novo')}}">Documento:</a></label> <div class="chosen-container chosen-container-multi" title="">
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select data-placeholder="Digite um documento" name="tipo_documento_id" class="chosen-select" multiple style="width:580px;">
+            <select data-placeholder="Digite um documento" name="tipo_documento" class="chosen-select" multiple style="width:580px;">
               @foreach($tipo_documentos as $tipo_documento)
-              <option value="{{$tipo_documento->id}}">{{$tipo_documento->documento}}</option>
+              <option value="{{$tipo_documento->nome}}">{{$tipo_documento->nome}}</option>
               @endforeach
             </select>
           </div>
@@ -132,5 +132,5 @@
 </div>
 </div>
 </div>
- 
+
 @endsection

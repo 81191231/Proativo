@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use App\Http\Requests;
 
-class ProtocoloRequest extends Request
-{
+class ProtocoloRequest extends Request{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,14 +22,8 @@ class ProtocoloRequest extends Request
      */
     public function rules()
     {
-        return [
-            //
-            'emitente' => 'required',
-            'destinatario' => 'required',
-            'tipo_documento' => 'required',
-            'inf_adicionais' => 'required'
-
-
+        return ['status' => 'required','emitente_id' => 'required','destinatario_id' => 'required',
+        'tipo_documento_id' => 'required','setor_id' => 'required','inf_adicionais' => 'required'
         ];
     }
 }

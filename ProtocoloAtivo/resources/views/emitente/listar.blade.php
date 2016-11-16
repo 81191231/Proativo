@@ -71,10 +71,9 @@
                 <tr class="odd" role="row">
                   <td>{{$emitente->nome}}</td>
                   <td>{{$emitente->email}}</td>
-                  <td>{{$emitente->snome}}</td>
+                  <td>{{$emitente->setor}}</td>
                   <td>{{$emitente->inf_adicionais}}</td>
                   <td><a href="{{URL::to('Emitente/'.$emitente->id.'/Editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">Editar</a>
-                      <a class="btn btn-success" href="{{URL::to('Emitente/'.$emitente->id.'/Protocolos')}}" data-toggle="tooltip" data-placement="top" title="Protocolos Gerados">Protocolos gerados</a>
                   </td> 
                 </tr>
                 <!--Fim linha da Tabela-->

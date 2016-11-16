@@ -26,55 +26,60 @@
         </div>
         <div class="x_content">
 
-          {!! Form::open(['url'=>'Emitente/'.$emitente->id.'/update']) !!}  
+          {!! Form::open(['url'=>'Emitente/'.$emitente->id.'/Update'],['name'=>'Emitente']) !!}  
           <div class="form-horizontal form-label-left" novalidate>
-            
-          </p>
-          <span class="section">Editar informações</span>
-          <div class="item form-group">
-            {!! Form::label('nome','Nome:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
+
+            <span class="section">Editar informações</span>
+            <div class="item form-group">
+              {!! Form::label('nome','Nome:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input class="form-control col-md-7 col-xs-12" name="nome" value="{{$emitente->nome}}" disable> 
+              </div>
+            </div>
+            <div class="item form-group">
+              {!! Form::label('email','Email',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input class="form-control col-md-7 col-xs-12" name="email" value="{{$emitente->email}}" disabled="disabled"> 
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label for="setor" class="control-label col-md-3 col-sm-3 col-xs-12">Setor</label>
+              <div class="chosen-container chosen-container-multi" title="">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select data-placeholder="Digite um documento" name="setor_id" class="chosen-select" style="width:460px;">
+                    @foreach($setors as $setor)
+                    @if($setor->id==$emitente->setor_id)
+                    <option value="{{$setor->id}}" selected="">{{$setor->nome}}</option>
+                    @else
+                    <option value="{{$setor->id}}">{{$setor->nome}}</option>
+                    @endif
+                    @endforeach                 
+                  </select>
+                </div>
+              </div>
+              <span class="required"><b style="color:red;">Verifique o Setor</b> *</span>
+            </div>
+            <div class="item form-group">
+              {!! Form::label('inf_adicionais','Informações adicionais:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+            </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input class="form-control col-md-7 col-xs-12" name="id" value="{{$emitente->id}}" disable> 
+              <textarea name="inf_adicionais" class="form-control col-md-7 col-xs-12" value="{{$emitente->inf_adicionais}}">
+              </textarea>
             </div>
           </div>
-          <div class="item form-group">
-            {!! Form::label('nome','Nome:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}<span class="required">*</span>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input class="form-control col-md-7 col-xs-12" name="nome" value="{{$emitente->nome}}"> 
-            </div>
-          </div>
-          <div class="item form-group">
-            <label for="setor" class="control-label col-md-3 col-sm-3 col-xs-12">Setor<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <select name="setor" class="form-control col-md-7 col-xs-12">
-                <option active>{{$emitente->setor}}</option>
-                <option>Finanças</option>
-                <option>RH</option>
-                <option>Marketing</option>
-                <option>Produção</option>
-                <option>Outro</option>
-              </select>
-            </div>
-          </div>
-          <div class="item form-group">
-            {!! Form::label('inf_adicionais','Informações adicionais:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            {!! Form::textarea('inf_adicionais', {{$emitente->inf_adicionais}},['class'=>'form-control col-md-7 col-xs-12']) !!}
-          </div>
-        </div>
-        <div class="ln_solid"></div>
-        <div class="form-group">
-          <div class="col-md-6 col-md-offset-3">
-           {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary']) !!} 
-           <button id="send" type="submit" class="btn btn-success">Limpar</button>
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-6 col-md-offset-3">
+            <button id="send" type="submit" class="btn btn-primary">Limpar</button>
+            {!! Form::submit('Cadastrar', ['class'=>'btn btn-success']) !!} 
+           </div>
          </div>
        </div>
+       {!! Form::close() !!} 
      </div>
-     {!! Form::close() !!} 
    </div>
  </div>
-</div>
 </div>
 </div>
 </div>

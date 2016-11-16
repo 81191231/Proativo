@@ -16,7 +16,7 @@ class Destinatario extends Migration
     Schema::create('destinatarios', function(Blueprint $table){
         $table->increments('id');
         $table->string('nome', 30);
-        $table->string('inf_adicionais',60);
+        $table->string('razao_social',60);
         $table->timestamps();
     });    
     }

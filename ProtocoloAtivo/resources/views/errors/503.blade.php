@@ -41,6 +41,10 @@
         <div class="container">
             <div class="content">
                 <div class="title">Aconteceu um imprevisto, volta a página.</div>
+                @if(!empty($msg))
+                {!! $msg !!}
+                @else
+                @endif
             </div>
         </div>
     </body>

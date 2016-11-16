@@ -8,4 +8,6 @@ class Setor extends Model
 {
     //
     protected $fillable = ['nome','inf_adicionais'];
+
+
 }
