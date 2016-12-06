@@ -37,30 +37,24 @@
         <span class="section">Inserir informações</span>
 
         <div class="item form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Id">Id:</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="id" value="{{$protocolo->id}}" required="required" disabled="disabled">
-          </div>
-        </div>
-
-        <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Id">Status:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="status" value="5" placeholder="<?php if($protocolo->status==0){echo 'Emitido';} ?>" required="required" disabled="disabled">
+            <input type="text" name="status" value="Cancelado" hidden>
+            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" value="{{$protocolo->status}}" required="required" disabled="disabled">
           </div>
         </div>
 
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente">Emitente:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="emitente" value="{{$protocolo->enome}}" required="required" disabled="disabled">
+            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="emitente" value="{{$protocolo->user->name}}" required="required" disabled="disabled">
           </div>
         </div>
 
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Destinatario">Destinatário:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="destinatario" value="{{$protocolo->dnome}}" required="required" disabled="disabled">
+            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="destinatario" value="{{$protocolo->destinatario->nome}}" required="required" disabled="disabled">
           </div>
         </div>
 
@@ -79,23 +73,9 @@
         </div>
 
         <div class="item form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Data_de_entrega">Data de Entrega:</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="data_hora_recebimento" value="{{$protocolo->data_hora_recebimento}}" required="required" disabled="disabled">
-          </div>
-        </div>
-
-        <div class="item form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Recebedor">Recebedor:</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="recebedor" value="{{$protocolo->recebedor}}" required="required" disabled="disabled">
-          </div>
-        </div>
-
-        <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Descrição do Cancelamento:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea id="textarea" name="inf_adicionais" value="{{$protocolo->inf_adicionais}}" class="form-control col-md-7 col-xs-12"></textarea>
+            <textarea id="textarea" name="motivo" class="form-control col-md-7 col-xs-12"></textarea>
           </div>
         </div>
 

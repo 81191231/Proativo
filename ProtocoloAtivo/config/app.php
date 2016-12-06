@@ -159,7 +159,6 @@ return [
         PROATIVO\Providers\AuthServiceProvider::class,
         PROATIVO\Providers\EventServiceProvider::class,
         PROATIVO\Providers\RouteServiceProvider::class,
-
         ],
 
     /*

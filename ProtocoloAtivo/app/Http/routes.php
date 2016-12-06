@@ -54,11 +54,17 @@ Route::get('Novo','ProtocoloController@novo');
 
 Route::post('Store','ProtocoloController@store');
 
-Route::get('{id}/Editar','ProtocoloController@editar');
+Route::get('{id}/Cancelar','ProtocoloController@cancelarGet');
 
-Route::get('{id}/Cancelamento','ProtocoloController@cancelar');
+Route::get('{id}/Cancelamento','ProtocoloController@cancelarPost');
 
-Route::get('{id}/Baixa','ProtocoloController@baixa');
+Route::get('Listar/Protocolos','ProtocoloController@pesquisaGet');
+
+Route::get('{id}/Anexo','ProtocoloController@anexoGet');
+
+Route::get('{id}/Baixa','ProtocoloController@baixaGet');
+
+Route::post('{id}/Baixar', 'ProtocoloController@baixaPost');
 
 Route::post('{id}/update','ProtocoloController@update');
 

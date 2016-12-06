@@ -27,17 +27,15 @@ function myFunction() {
       <div class="x_panel">
         <div class="x_title">
           <h2>Dar Baixa<small></small></h2>
-          @if ($errors->any())
-          <ul class="alert alert-warning">
-           @foreach($errors->all() as $error)
-           <li>{{ $error }}</li>
-           @endforeach
-         </ul> 
-         @endif
+          @if(!empty($msg))
+          <div class="alert alert-warning" role="alert">{{$msg}} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button></div>
+          @endif
          <div class="clearfix"></div>
        </div>
        <div class="x_content">
-        {!! Form::open(['url'=>'Protocolo/'.$protocolo->id.'/update'])!!}
+        {!! Form::open(['url'=>'Protocolo/'.$protocolo->id.'/Baixar'])!!}
         <div class="form-horizontal form-label-left" novalidate>
 
         </p>
@@ -53,21 +51,22 @@ function myFunction() {
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Id">Status:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="status" value="Entregue" placeholder="<?php if($protocolo->status==0){echo 'Emitido';} ?>" required="required" disabled="disabled">
+            <input type="text" name="status" value="Entregue" hidden>
+            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" value="{{$protocolo->status}}" required="required" disabled="disabled">
           </div>
         </div>
 
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente">Emitente:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="emitente" value="{{$protocolo->emitente}}" required="required" disabled="disabled">
+            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="user_id" value="{{$protocolo->user->name}}" required="required" disabled="disabled">
           </div>
         </div>
 
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Destinatario">Destinatário:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="destinatario" value="{{$protocolo->destinatario}}" required="required" disabled="disabled">
+            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="destinatario_id" value="{{$protocolo->destinatario->razao_social}}" required="required" disabled="disabled">
           </div>
         </div>
 
@@ -77,13 +76,6 @@ function myFunction() {
             <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tipo_documento" value="{{$protocolo->tipo_documento}}" required="required" disabled="disabled">
           </div>
         </div>
-        <div class="item form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento">Setor:</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="setor" value="{{$protocolo->setor}}" required="required" disabled="disabled">
-          </div>
-        </div>
-
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Data_de_emissao">Data de Emissão:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -104,19 +96,13 @@ function myFunction() {
             <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="recebedor" value="{{$protocolo->recebedor}}" required="required">
           </div>
         </div>
-
-        <div class="item form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Descrição do Protocolo:</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea id="textarea" name="inf_adicionais" value="{{$protocolo->inf_adicionais}}" class="form-control col-md-7 col-xs-12"></textarea>
-          </div>
-        </div>
-
+        
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Inserir Documento:</label>
           <div class="col-md-6 col-sm-6 col-xs-12"> 
-            <input type="file" id="mFile" name="documento" name="inf_adicionais" class="form-control col-md-7 col-xs-12" accept="image/*">
+            <input type="file" id="mFile" name="anexo_documento" class="form-control col-md-7 col-xs-12" accept="image/*">
           </div>
+          <span style="font-size:10px;">Tamanha máximo do arquivo: 4mb</span>
         </div>
 
         <div class="ln_solid"></div>

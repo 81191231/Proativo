@@ -16,6 +16,7 @@ class AdmController extends Controller{
     //User Method's
     public function listarUserGet(){
     	$users = User::all();
+		
     	if(empty($users)){
     		$msg = 'Nenhum_emitente_existente';
     	}

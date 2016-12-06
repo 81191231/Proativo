@@ -89,16 +89,17 @@
 
 
 
-              <!--Menu do Setor-->
+              <!--Menu do Setor
               <li><a><i class="glyphicon glyphicon-folder-close"></i> Setor <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="{{URL::asset('Setor/Novo')}}" alt="Novo Setor" accesskey="" data-toggle="tooltip" data-placement="right" title="">Novo</a></li>
                   <li><a href="{{URL::asset('Setor/Listar')}}" alt="Listar Setor" accesskey="" data-toggle="tooltip" data-placement="right" title="">Listar</a></li>
                 </ul>
               </li>
+              -->
 
               <!--Menu do Destino-->
-              <li><a><i class="fa fa-location-arrow"></i> Destinatário <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-location-arrow"></i>Destinatário <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="{{URL::asset('Destinatario/Novo')}}" alt="Novo Destinatário" accesskey="D" data-toggle="tooltip" data-placement="right" title="Alt+D">Novo</a></li>
                     <!--

@@ -2,7 +2,6 @@
 @extends('template')
 @section('content')
 <div class="right_col" role="main" style="min-height: 3162px;">
-  <div>
     <div class="page-title">
       <div class="title_left">
         <h3>Protocolo</h3>
@@ -10,10 +9,21 @@
       <div class="title_right">
         <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
           <div class="input-group">
-            <span class="input-group-btn"><input id="busca" class="form-control" name="destinatario" type="text" placeholder="Pesquisar por data de emissão"><input type="submit" class="btn btn-default" value="Ok" style="" data-toggle="modal" data-target="#ModalBusca"></span>
+            <form action="">
+            <div >
+            <select name="status" class="form-control" >
+            <option value="todos">Todos</option>
+            <option value="Emitente">Últimos Emitidos</option>
+            <option value="Cancelado">Últimos Cancelados</option>
+            <option value="Entregue">Últimos Entregues</option>
+            </select>
+            <input type="submit" class="btn btn-default btn-sm" value="OK">
+            </div>
+            </form>
           </div>
         </div>
       </div>
+
 
       <div class="clearfix"></div>
 
@@ -30,6 +40,7 @@
               </ul>
               <div class="clearfix"></div>
             </div>
+
 
             <div class="x_content">
               <p class="text-muted font-13 m-b-30">
@@ -50,11 +61,9 @@
                       <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Destinatário</th>
                       <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Emitente</th>
                       <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Tipo do Documento</th>
-                      <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Setor</th>
                       <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Recebedor</th>
                       <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Data e hora de Emissão</th>
                       <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Data de Recebimento</th>
-                      <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Informações Adicionais</th>
                       <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Anexo</th>
                       <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="3">Ações</th>
                     </tr>
@@ -67,44 +76,50 @@
 
                     @foreach($protocolos as $protocolo)
                     <!--linha da Tabela-->
-                    <tr class="odd" role="row">
+                    @if($protocolo->status=="Emitido")
+                    <tr role="row" class="active">
+                    @elseif($protocolo->status=="Entregue")
+                    <tr role="row" class="success">
+                    @else
+                    <tr role="row" class="danger">
+                    @endif
                       <td>
                         @if($protocolo->status=="Emitido")
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Emitido"></span>
-                        @endif
-                        @if($protocolo->status=="Entregue")
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enviado"></span>
-                        @endif
-                        @if($protocolo->status=="Enviado")
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Entregue"></span>
-                        @endif
-                        @if($protocolo->status=="Cancelado")
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Cancelado"></span>
-                        @endif
-                        @if($protocolo->status=="Em espera")
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Cancelado"></span>
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Arquivado"></span>
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Emitido"></span>
+                        @elseif($protocolo->status=="Entregue")
+                        <span class="glyphicon glyphicon-check" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Entregue"></span>
+                        @else
+                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Cancelado:{{$protocolo->motivo}}"></span>
                         @endif
                       </td>
-                      <td>{{$protocolo->destinatario}}</td>
-                      <td>{{$protocolo->emitente}}</td>
+                      <td>{{$protocolo->destinatario->razao_social}}</td>
+                      <td>{{$protocolo->user->name}}</td>
                       <td>{{$protocolo->tipo_documento}}</td>
-                      <td>{{$protocolo->setor}}</td>
                       <td>{{$protocolo->recebedor}}</td>
                       <td>{{$protocolo->created_at}}</td>
                       <td>{{$protocolo->data_hora_recebimento}}</td>
-                      <td>{{$protocolo->inf_adicionais}}</td>
-                      <td>{{$protocolo->documento}}</td>
+                      @if($protocolo->status=="Entregue")
+                      <td><a href="{{URL::to('Protocolo/'.$protocolo->id.'/Anexo')}}">Ver Anexo</a></td>
+                      @else
+                      <td>{{$protocolo->anexo_comprovante}}</td>
+                      @endif
                       <td>
                        <!-- <a class="btn btn-danger" href="{{URL::to('Protocolo/'.$protocolo->id.'/Cancelamento')}}" data-toggle="tooltip" data-placement="top" title="Cancelar">Cancelar</a> -->
-                       <a href="{{URL::to('Protocolo/'.$protocolo->id.'/comprovante')}}" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Documento">Documento</a>
-                       <a href="{{URL::to('Protocolo/'.$protocolo->id.'/Baixa')}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Documento">Dar Baixa</a>
+                       <a href="{{URL::to('Protocolo/'.$protocolo->id.'/comprovante')}}" type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Ver Documento"><span class="glyphicon glyphicon-folder-open"></span></a>
+                       @if($protocolo->status=="Emitido")
+                       <a href="{{URL::to('Protocolo/'.$protocolo->id.'/Baixa')}}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Dar Baixa"><span class="glyphicon glyphicon-folder-close"></span></a>
+                       <a href="{{URL::to('Protocolo/'.$protocolo->id.'/Cancelar')}}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Cancelar"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                       @endif
                      </td>
                    </tr>
                    <!--Fim linha da Tabela-->
                    @endforeach
                    @else
+                   <tr class="odd" role="row">
+                   <td>
                    <div id="modal" class="alert alert-danger" role="alert">Nenhum protocolo existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                   </td>
+                   </tr>
                    @endif
                  </tbody>
                </table>
@@ -126,6 +141,7 @@
                   </ul></div></div></div></div>
                 </div>
               </div>
+            </div>
             </div> <!-- fim do Menu das Proximas Paginas-->
 
 

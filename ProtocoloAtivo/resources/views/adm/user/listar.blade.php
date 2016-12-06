@@ -52,7 +52,6 @@
 
                 <!--Label da Tabela-->
                 <thead>
-                  <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Tipo</th>
                   <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Nome</th>
                   <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Email</th>
                   <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Setor</th>
@@ -69,7 +68,6 @@
                 @foreach($users as $user)
                 <!--linha da Tabela-->
                 <tr class="odd" role="row">
-                  <td>{{$user->tipo}}</td>
                   <td>{{$user->name}}</td>
                   <td>{{$user->email}}</td>
                   <td>{{$user->setor}}</td>

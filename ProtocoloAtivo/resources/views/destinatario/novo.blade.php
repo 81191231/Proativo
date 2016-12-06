@@ -45,9 +45,9 @@
 
 
           <div class="item form-group">
-           {!! Form::label('inf_adicionais','Informações Adicionais:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12'])!!}
+           {!! Form::label('razao_social','Razão Social:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12'])!!}
            <div class="col-md-6 col-sm-6 col-xs-12">
-            {!! Form::textarea('inf_adicionais',null,['class'=>'form-control col-md-7 col-xs-12'])!!}
+            {!! Form::text('razao_social',null,['class'=>'form-control col-md-7 col-xs-12'])!!}
           </div>
         </div>
 

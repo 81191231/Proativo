@@ -8,6 +8,19 @@ use PROATIVO\Emitente;
 class Protocolo extends Model
 {
     //
-    protected $fillable = ['id','status','recebedor','data_hora_recebimento','inf_adicionais', 'motivo'];
-    protected $tdocumento =['tipo_documento'=>'array'];
+    protected $fillable = ['status','recebedor','data_hora_recebimento','motivo','anexo_comprovante', 'user_id','tipo_documento','destinatario_id'];
+    //
+
+    public function tipo_documentos(){
+          return $this->belongsToMany('PROATIVO\Tipo_documento');
+    }
+    //
+    public function destinatario(){
+        return $this->belongsTo('PROATIVO\destinatario');
+    }
+
+    public function user(){
+        return $this->belongsTo('PROATIVO\User');
+    }
+    
 }

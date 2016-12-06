@@ -11,8 +11,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'tipo','name', 'email', 'setor_id','password'
+    protected $fillable = ['name', 'email','password','setor'
     ];
 
     /**
@@ -23,8 +22,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
     public function getAuthPassword(){
         return $this->password;
+    }
+    public function setor(){
+        return $this->hasOne('App\Setor');
+    }
+
+    public function protocolo(){
+        return $this->hasOne('PROATIVO\Protocolo');
     }
 }

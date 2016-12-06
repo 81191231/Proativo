@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PROATIVO\Http\Requests;
 use PROATIVO\User;
+use PROATIVO\Adm;
 use Illuminate\Support\Facades\DB;
-use Crypt;
 class LoginController extends Controller{
 
 	protected $redirectTo = '/';
@@ -22,27 +22,25 @@ class LoginController extends Controller{
 	//LoginPost
 	public function login(Request $req) { 
 		$emailU = $req->get('email');
-		$user = DB::table('users')->where('email',$emailU);
-		if(!empty($user)){
-			$pass = \Crypt::decrypt($user->only('password'));
-
-			if($req->only('password')===$pass){
-				if($user->get('tipo')==='emitente'){
-					return redirect()->action('EmitenteController@homeGet');
+		$password = $req->get('password');
+			$adm = DB::table('Adms')->where('email',$emailU);
+			if(!empty($adm)){
+				if(Auth::guard('adm')->attempt(['email' => $emailU, 'password' => $password],false,false)){
+					return redirect()->action('AdmController@homeGet');
 				}else{
-					return redirect()->action('AdmController@homeGetx');
+					return view('login');
+					
 				}
-				//
-			}else{
-				$msg = 'email_senha_n_c';
-				return view('login',compact('msg'));
 			}
-		}else{
 			$msg = 'user_inexistente';
 			return view('login',compact('msg'));
-		}
-		return;
 	}
+
+	public function create(Request $req){
+		$adm = Adm::create($req->all());
+		return view('login');
+	}
+
 
 
 }

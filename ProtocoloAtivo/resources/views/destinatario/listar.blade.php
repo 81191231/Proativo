@@ -54,7 +54,7 @@
                 <thead>
                   <tr role="row">
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Nome</th>
-                    <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Informações Adicionais</th>
+                    <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Razão Social</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Ações</th>
                   </tr>
                 </thead>
@@ -66,7 +66,7 @@
                   <!--linha da Tabela-->@foreach($destinatarios as $destinatario)
                   <tr class="odd" role="row">
                     <td>{{$destinatario->nome}}</td>
-                    <td>{{$destinatario->inf_adicionais}}</td>
+                    <td>{{$destinatario->razao_social}}</td>
                     <td><a href="{{URL::to('Destinatario/'.$destinatario->id.'/Editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">Editar</a>
                       <a class="btn btn-success" href="{{URL::to('Destinatario/'.$destinatario->id.'/Protocolos')}}" data-toggle="tooltip" data-placement="top" title="Protocolos Gerados">Protocolos gerados</a>
                     </td> 

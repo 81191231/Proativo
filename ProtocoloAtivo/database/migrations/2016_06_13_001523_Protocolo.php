@@ -20,11 +20,10 @@ class Protocolo extends Migration
         $table->integer('destinatario_id')->unsigned();
         $table->foreign('destinatario_id')->references('id')->on('destinatarios');
         $table->string('recebedor')->default('Ainda não foi recebido');    
-        $table->integer('tipo_documento_id')->unsigned();
-        $table->foreign('tipo_documento_id', array())->references('id')->on('Tipo_documentos');
-        $table->string('anexo_comprovante',array())->default('Nenhum Documento anexado');
+        $table->json('tipo_documento');
+        $table->string('anexo_comprovante')->default('Nenhum Documento anexado');
         $table->string('data_hora_recebimento')->default('Documento ainda não foi entregue!');
-        $table->string('motivo');
+        $table->string('motivo')->default('nenhum');
         $table->timestamps();
     }); 
 
