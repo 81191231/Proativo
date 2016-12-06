@@ -17,7 +17,9 @@ class CreateUsersTable extends Migration
             $table->enum('tipo', array('emitente','adm'))->default('emitente');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->integer('setor_id')->unsigned();
+            $table->foreign('setor_id')->references('id')->on('setors');
+            $table->string('password',255)->default('proativo123');
             $table->rememberToken();
             $table->timestamps();
         });

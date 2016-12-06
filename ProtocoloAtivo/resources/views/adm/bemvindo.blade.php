@@ -1,4 +1,4 @@
-@extends('template')
+@extends('adm.template')
         <!-- page content Pagina de Conteudo  -->
 @section('content')
         <div class="right_col" role="main">

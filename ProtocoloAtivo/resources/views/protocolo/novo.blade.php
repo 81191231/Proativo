@@ -24,10 +24,11 @@
           <h2>Novo Protocolo<small></small></h2>
           <div class="clearfix"></div>
         </div> 
-        <?php
-        if(!empty($msg)){
-          echo $msg;
-        } ?>
+        @if(!empty($msg)){
+        {!! $msg !!}
+        @else
+
+        @endif
         <div class="x_content">
           {!! Form::open(['url'=>'Protocolo/Store'],['name'=>'protocolo'])!!}
           <div class="form-horizontal form-label-left" novalidate>
@@ -57,13 +58,13 @@
           </div>
 
           <div class="item form-group">
-            @if(!empty($emitentes))
+            @if(!empty($users))
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente"><a href="{{URL::asset('Emitente/Novo')}}">Emitente:</a></label>
              <div class="chosen-container chosen-container-multi" title="">
               <div class="col-md-6 col-sm-6 col-xs-12">
-              <select data-placeholder="" name="emitente" class="chosen-select"style="width:580px;">
-                  @foreach($emitentes as $emitente)
-                  <option value="{{$emitente->nome}}">{{$emitente->nome}}</option>
+              <select data-placeholder="" name="user_id" class="chosen-select"style="width:580px;">
+                  @foreach($users as $user)
+                  <option value="{{$user->id}}">{{$user->name}}</option>
                   @endforeach
                 </select>
               </div>
@@ -73,31 +74,13 @@
             <div id="modal" class="alert alert-danger" role="alert">Nenhum emitente existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
             @endif
           </div>
-          <div id="tDocumento" class="item form-group">
-          </div>
-          <div class="item form-group">
-            @if(!empty($setors))
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoDocumento"><a href="{{URL::asset('Setor/Novo')}}">Setor:</a></label>
-             <div class="chosen-container chosen-container-multi" title="">
-              <div class="col-md-6 col-sm-6 col-xs-12">
-              <select data-placeholder="Digite um documento" name="setor" class="chosen-select" style="width:580px;">
-                  @foreach($setors as $setor)
-                  <option value="{{$setor->nome}}">{{$setor->nome}}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-          <span class="required">*</span>
-          @else
-          <div id="modal" class="alert alert-danger" role="alert">Nenhum setor existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
-          @endif
-        </div>
+
         <!--Adicionar Documento -->
         <div class="item form-group">
           @if(!empty($tipo_documentos))
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Tipo_documento"><a href="{{URL::asset('Tipo_Documento/Novo')}}">Documento:</a></label> <div class="chosen-container chosen-container-multi" title="">
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select data-placeholder="Digite um documento" name="tipo_documento" class="chosen-select" multiple style="width:580px;">
+            <select data-placeholder="Digite um documento" name="tipo_documento[]" class="chosen-select" multiple style="width:580px;">
               @foreach($tipo_documentos as $tipo_documento)
               <option value="{{$tipo_documento->nome}}">{{$tipo_documento->nome}}</option>
               @endforeach

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class destinatario extends Model
 {
     //
-    protected $fillable = ['nome','inf_adicionais'];
+    protected $fillable = ['nome','razao_social'];
 }

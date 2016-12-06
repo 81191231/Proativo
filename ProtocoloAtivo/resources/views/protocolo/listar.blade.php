@@ -69,63 +69,68 @@
                     <!--linha da Tabela-->
                     <tr class="odd" role="row">
                       <td>
-                        <?php if($protocolo->status=="Emitido"){
-                          echo '<span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Emitido"></span>';
-                        }else if($protocolo->status==""){
-                         echo '<span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enviado"></span>';
-                       }else if($protocolo->status==""){
-                         echo '<span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Entregue"></span>';
-                       }else if($protocolo->status==""){
-                         echo '<span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Cancelado"></span>';
-                       }else{
-                         echo '<span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Arquivado"></span>';
-                       }?>
-                     </td>
-                     <td>{{$protocolo->destinatario}}</td>
-                     <td>{{$protocolo->emitente}}</td>
-                     <td>{{$protocolo->tipo_documento}}</td>
-                     <td>{{$protocolo->setor}}</td>
-                     <td>{{$protocolo->recebedor}}</td>
-                     <td>{{$protocolo->created_at}}</td>
-                     <td>{{$protocolo->data_hora_recebimento}}</td>
-                     <td>{{$protocolo->inf_adicionais}}</td>
-                     <td>{{$protocolo->documento}}</td>
-                     <td>
+                        @if($protocolo->status=="Emitido")
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Emitido"></span>
+                        @endif
+                        @if($protocolo->status=="Entregue")
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enviado"></span>
+                        @endif
+                        @if($protocolo->status=="Enviado")
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Entregue"></span>
+                        @endif
+                        @if($protocolo->status=="Cancelado")
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Cancelado"></span>
+                        @endif
+                        @if($protocolo->status=="Em espera")
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Cancelado"></span>
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Arquivado"></span>
+                        @endif
+                      </td>
+                      <td>{{$protocolo->destinatario}}</td>
+                      <td>{{$protocolo->emitente}}</td>
+                      <td>{{$protocolo->tipo_documento}}</td>
+                      <td>{{$protocolo->setor}}</td>
+                      <td>{{$protocolo->recebedor}}</td>
+                      <td>{{$protocolo->created_at}}</td>
+                      <td>{{$protocolo->data_hora_recebimento}}</td>
+                      <td>{{$protocolo->inf_adicionais}}</td>
+                      <td>{{$protocolo->documento}}</td>
+                      <td>
                        <!-- <a class="btn btn-danger" href="{{URL::to('Protocolo/'.$protocolo->id.'/Cancelamento')}}" data-toggle="tooltip" data-placement="top" title="Cancelar">Cancelar</a> -->
                        <a href="{{URL::to('Protocolo/'.$protocolo->id.'/comprovante')}}" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Documento">Documento</a>
                        <a href="{{URL::to('Protocolo/'.$protocolo->id.'/Baixa')}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Documento">Dar Baixa</a>
-                       </td>
-                    </tr>
-                    <!--Fim linha da Tabela-->
-                    @endforeach
-                    @else
-                    <div id="modal" class="alert alert-danger" role="alert">Nenhum protocolo existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
-                    @endif
-                  </tbody>
-                </table>
+                     </td>
+                   </tr>
+                   <!--Fim linha da Tabela-->
+                   @endforeach
+                   @else
+                   <div id="modal" class="alert alert-danger" role="alert">Nenhum protocolo existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                   @endif
+                 </tbody>
+               </table>
 
-              </div>
-            </div>
+             </div>
+           </div>
 
 
-            <!-- div do Menu das Proximas Paginas-->
-            <div class="row">
-              <div class="col-sm-5">
-                <!--<div class="dataTables_info" id="datatable_info" role="status" aria-live="polite"> 1 para 10 de 57 Páginas no Total. </div></div>-->
-                <div class="col-sm-7">
-                  <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
-                    <ul class="pagination"><li class="paginate_button previous disabled" id="datatable_previous">
-                      <a tabindex="0" aria-controls="datatable" href="#" data-dt-idx="0">Próxima</a></li>
-                      <li class="paginate_button active"><a tabindex="0" aria-controls="datatable" href="#" data-dt-idx="1">1</a></li>
-                      <li class="paginate_button next" id="datatable_next"><a tabindex="0" aria-controls="datatable" href="#" data-dt-idx="7">Próxima</a></li>
-                    </ul></div></div></div></div>
-                  </div>
+           <!-- div do Menu das Proximas Paginas-->
+           <div class="row">
+            <div class="col-sm-5">
+              <!--<div class="dataTables_info" id="datatable_info" role="status" aria-live="polite"> 1 para 10 de 57 Páginas no Total. </div></div>-->
+              <div class="col-sm-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                  <ul class="pagination"><li class="paginate_button previous disabled" id="datatable_previous">
+                    <a tabindex="0" aria-controls="datatable" href="#" data-dt-idx="0">Próxima</a></li>
+                    <li class="paginate_button active"><a tabindex="0" aria-controls="datatable" href="#" data-dt-idx="1">1</a></li>
+                    <li class="paginate_button next" id="datatable_next"><a tabindex="0" aria-controls="datatable" href="#" data-dt-idx="7">Próxima</a></li>
+                  </ul></div></div></div></div>
                 </div>
-              </div> <!-- fim do Menu das Proximas Paginas-->
+              </div>
+            </div> <!-- fim do Menu das Proximas Paginas-->
 
 
-            </div><!--Fim da Tabela com Valores-->
+          </div><!--Fim da Tabela com Valores-->
 
-          </div>
-          <!-- /page content fim da Pagina -->
-          @endsection
+        </div>
+        <!-- /page content fim da Pagina -->
+        @endsection

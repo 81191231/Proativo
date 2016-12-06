@@ -7,15 +7,15 @@ class DestinatarioController extends Controller{
 
 	public function listar(){ 
 		$destinatarios = destinatario::all(); 
-		return view('destinatario.listar',['destinatarios'=>$destinatarios]);
+		return view('auth.emitente.destinatario.listar',['destinatarios'=>$destinatarios]);
 	}
 
 	public function novo(){		
-		return view('destinatario.novo');
+		return view('auth.emitente.destinatario.novo');
 	}
 
 	public function buscar(){		
-		return view('destinatario.editar');
+		return view('auth.emitente.destinatario.editar');
 	}
 
 	public function update(Request $request, $id){ 
@@ -32,11 +32,11 @@ class DestinatarioController extends Controller{
 		catch(Exception $ex){
 			$msg = '<div id="modal" class="alert alert-danger" role="alert">Erro ao cadastrar destinatário!</div>';
 		}
-		return view('destinatario.novo',compact('msg'));
+		return view('auth.emitente.destinatario.novo',compact('msg'));
 	}
 	
 	public function editar($id){
 		$destinatario = destinatario::find($id);
-		return view('destinatario.editar', compact('destinatario')); 
+		return view('auth.emitente.destinatario.editar', compact('destinatario')); 
 	}
 }

@@ -14,7 +14,7 @@ class UserController extends Controller{
             $m->to($user->email, $user->name)->subject('Your Reminder!');
      		});
     }
-    public function send()
+    public function sendI()
       {
         $input = Input::all();
         Mail::send('emails.contatos.index', $input, function($message) {
@@ -22,8 +22,14 @@ class UserController extends Controller{
         });
         return Redirect::to('form');
       }
+    
     public function updatePerfil(Request $request){
       $input = Request::all();
       
     }
+
+    protected function perfilGet(){
+      
+    }
+
 }

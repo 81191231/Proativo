@@ -9,25 +9,28 @@ use Illuminate\Support\Facades\Auth;
 use PROATIVO\Http\Requests;
 use PROATIVO\User;
 use Illuminate\Support\Facades\DB;
-use Validator;
+use Crypt;
 class LoginController extends Controller{
 
 	protected $redirectTo = '/';
 
+	protected function guard()
+{
+    return Auth::guard('guard-name');
+}
+
 	//LoginPost
 	public function login(Request $req) { 
 		$emailU = $req->get('email');
-		$password = $req->get('password');
 		$user = DB::table('users')->where('email',$emailU);
 		if(!empty($user)){
-			$userLog = array('email'=>$req->get('email'),
-				'password'=> bcrypt($req->get('password'))
-				);
-			if(Auth::attempt($userLog)) {
+			$pass = \Crypt::decrypt($user->only('password'));
+
+			if($req->only('password')===$pass){
 				if($user->get('tipo')==='emitente'){
-					return view('auth.emitente.bemvindo'); 	
+					return redirect()->action('EmitenteController@homeGet');
 				}else{
-					return view('auth.adm.bemvindo'); 
+					return redirect()->action('AdmController@homeGetx');
 				}
 				//
 			}else{
@@ -41,14 +44,5 @@ class LoginController extends Controller{
 		return;
 	}
 
-	protected function create(Request $data){
-        User::create(['name' => $data->get('name'),
-            'email' => $data->get('email'),
-            'password' => bcrypt($data->get('password')),
-        ]);
-        $msg = 'Cadastrado';
-        return view('login',compact('msg'));
-
-    }
 
 }

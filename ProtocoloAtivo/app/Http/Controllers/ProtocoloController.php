@@ -9,7 +9,6 @@ use PROATIVO\Setor;
 use PROATIVO\Tipo_documento;
 use Illuminate\Support\Facades\DB;
 class ProtocoloController extends Controller{
-
 	public function listar(){ 
 		$protocolos = Protocolo::all();
 		if(!empty($protocolos)){
@@ -21,14 +20,20 @@ class ProtocoloController extends Controller{
 		return;
 	}
 
-	public function baixa($id){
-		$protocolo = Protocolo::find($id);
-		return view('protocolo.baixa',compact('protocolo'));
+	public function baixa(Request $request,$id){
+		$protocolo = Protocolo::find($id)->update($request->all());
+		if(!empty($protocolo)){
+			return view('protocolo.baixa',compact('protocolo'));
+		}else{
+			return view('protocolo.baixa',compact('protocolo'));
+		}
 	}
 
 	public function novo(){
 		$destinatarios = destinatario::all();
-		$users = User::all()->where('tipo','=','emitente');
+		
+		$users = User::all();
+		
 		$tipo_documentos = Tipo_documento::all();
 		$setors = Setor::all();
 		return view('protocolo.novo',compact('users','setors', 'tipo_documentos'),['destinatarios'=>$destinatarios]);
@@ -41,7 +46,7 @@ class ProtocoloController extends Controller{
 	}
 
 	public function store(Request $request){
-		$input = $request->all(); 
+		$input = $request->all(); 			
 		$pt= Protocolo::create($input);
 		$e = $input->get('Emitente');
 		$msg = '<div id="modal" class="alert alert-success" role="alert">Protocolo gerado com sucesso!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';

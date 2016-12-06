@@ -79,43 +79,53 @@
                   </ul>
                 </li>
 
-                <!--Menu do Protocolo-->
+                <!--Menu do Protocolo
                 <li><a><i class="fa fa-edit"></i> Protocolo <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="{{URL::asset('Protocolo/Novo')}}" alt="Novo Protocolo = " accesskey="P" data-toggle="tooltip" data-placement="right" title="Alt+P">Novo</a></li>
                     <li><a href="{{URL::asset('Protocolo/Listar')}}" alt="Listar Protocolos" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+3">Listar</a></li>
                   </ul>
                 </li>
-
-
+                -->
+                <!--Menu do Emitente-->
+                <li><a><i class="fa fa-envelope-o"></i> Emitente <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{{URL::asset('Adm/Novo/Emitente')}}" alt="Novo Emitente" accesskey="u" data-toggle="tooltip" data-placement="right" title="Alt+U">Novo</a></li>
+                  <!--
+                    <li><a href="{{URL::asset('Adm/Buscar/Emitente')}}"alt="Editar Emitente" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+5">Buscar</a></li>
+                  -->
+                  <li><a href="{{URL::asset('Adm/Listar/Emitente')}}" alt="Listar Emitente" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+6">Listar</a></li>
+                </ul>
+              </li>
 
               <!--Menu do Setor-->
               <li><a><i class="glyphicon glyphicon-folder-close"></i> Setor <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="{{URL::asset('Setor/Novo')}}" alt="Novo Setor" accesskey="" data-toggle="tooltip" data-placement="right" title="">Novo</a></li>
-                  <li><a href="{{URL::asset('Setor/Listar')}}" alt="Listar Setor" accesskey="" data-toggle="tooltip" data-placement="right" title="">Listar</a></li>
+                  <li><a href="{{URL::asset('Adm/Novo/Setor')}}" alt="Novo Setor" accesskey="" data-toggle="tooltip" data-placement="right" title="">Novo</a></li>
+                  <li><a href="{{URL::asset('Adm/Listar/Setor')}}" alt="Listar Setor" accesskey="" data-toggle="tooltip" data-placement="right" title="">Listar</a></li>
                 </ul>
               </li>
-
-              <!--Menu do Destino-->
+              
+              <!--Menu do Destino
               <li><a><i class="fa fa-location-arrow"></i> Destinatário <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="{{URL::asset('Destinatario/Novo')}}" alt="Novo Destinatário" accesskey="D" data-toggle="tooltip" data-placement="right" title="Alt+D">Novo</a></li>
-                    <!--
+                    
                     <li><a href="{{URL::asset('Destinatario/Buscar')}}" alt="Editar Destinatário" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+8">Buscar</a></li>
-                  -->
+                  
                   <li><a href="{{URL::asset('Destinatario/Listar')}}" alt="Listar Destinatário" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+9">Listar</a></li>
 
                 </ul>
               </li>
-
-              <!--Menu do Tipo de Documento-->
+              -->
+              <!--Menu do Tipo de Documento
               <li><a><i class="glyphicon glyphicon-file"></i> Tipo de Documento <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="{{URL::asset('Tipo_Documento/Novo')}}" alt="Novo Destinatário" accesskey="T" data-toggle="tooltip" data-placement="right" title="Alt+T">Novo</a></li>
                   <li><a href="{{URL::asset('Tipo_Documento/Listar')}}" alt="Listar Destinatário" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+r">Listar</a></li>
                 </ul>
               </li>
+              -->
 
               <!--Menu Sobre-->
               <ul class="nav side-menu">

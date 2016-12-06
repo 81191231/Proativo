@@ -6,27 +6,22 @@ use PROATIVO\Setor;
 class SetorController extends Controller{
 	
 	public function listar(){ 
-		
 		$setors = Setor::all(); 
-		return view('setor.listar',['setors'=>$setors]); 
+		return view('auth.emitente.setor.listar',['setors'=>$setors]); 
 	}
 	
 	public function novo(){		
-		return view('setor.novo');
+		return view('auth.emitente.setor.novo');
 	}
 	
 	public function buscar(){		
-		return view('setor.editar');
+		return view('auth.emitente.setor.editar');
 	}
+	
 	public function delete($id){
 		Setor::delete($id);
 	}
-	
-	public function busca(SetorRequest $request, $nome){
-		$setors = Setor::find($nome);	
-		return view(['setor'=>$setors]);
-	}
- 	
+
 	public function update(Request $request, $id){ 
 		$input = $request->all();
 		Setor::find($id)->update($input);
@@ -46,16 +41,16 @@ class SetorController extends Controller{
 			<span aria-hidden="true">&times;</span>
 			</button></div>';
 		}
-		return view('Setor.novo',compact('msg'));
+		return view('auth.emitente.setor.novo',compact('msg'));
 	}
 	
 	public function editar(Request $request, $id){
 		$setor = Setor::find($id);
-		return view('setor.editar', compact('setor')); 
+		return view('auth.emitente.setor.editar', compact('setor')); 
 	}
 	
 	public function buscarProtocolos($id){
 		$setor = Protocolos::all()->where('setor_id',$id);
-		return view('setor.editar', compact('setor')); 
+		return view('auth.emitente.setor.editar', compact('setor')); 
 	}
 }
