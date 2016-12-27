@@ -44,6 +44,8 @@
           @endif
           @else
           @endif
+         <!--
+         
           <input type="text" name="_token" value="{!! csrf_token() !!}" hidden>
           <div>
             <input type="email" class="form-control" placeholder="Email" name="email" required="" />
@@ -56,7 +58,13 @@
             <a href="#">Esqueceu sua Senha?</a>
           </div>
           <hr>
+    -->
 
+          <div class="form-group">
+          <a href=""></a>
+          <hr>
+          <a href=""></a>
+          </div>  
           <div>
 
             <p>©2016 Todos os Direitos Reservados. <ProAtivo></ProAtivo> </p>

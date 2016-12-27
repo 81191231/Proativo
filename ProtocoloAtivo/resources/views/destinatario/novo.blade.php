@@ -36,18 +36,25 @@
           </p>
           <span class="section">Inserir informações</span>
 
-          <div class="item form-group">
-            {!! Form::label('nome','Nome:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12'])!!}<span class="required">*</span>
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nome:</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              {!! Form::text('nome',null,['class'=>'form-control col-md-7 col-xs-12'])!!}
+              <input type="text" name="nome" class="form-control col-md-7 col-xs-12">
             </div>
-          </div>
+        </div>
 
 
-          <div class="item form-group">
-           {!! Form::label('razao_social','Razão Social:',['class'=>'control-label col-md-3 col-sm-3 col-xs-12'])!!}
+        <div class="item form-group">
+           <label for="razao_social" class="control-label col-md-3 col-sm-3 col-xs-12"> Razão Social:</label><span class="required">*</span>
            <div class="col-md-6 col-sm-6 col-xs-12">
-            {!! Form::text('razao_social',null,['class'=>'form-control col-md-7 col-xs-12'])!!}
+            <input type="text" name="razao_social" class="form-control col-md-7 col-xs-12" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-3">CNPJ:</label><span aria-hidden="true">*</span>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+          <input type="text" class="form-control" data-inputmask="'mask' : '99-999-999/99999-99'" required="required">
           </div>
         </div>
 

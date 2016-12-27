@@ -48,12 +48,9 @@
               <div class="chosen-container chosen-container-multi" title="">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select data-placeholder="Digite um documento" name="setor_id" class="chosen-select" style="width:460px;">
+                  <option value="{{$user->setor}}">{{$user->setor}}</option>
                     @foreach($setors as $setor)
-                    @if($setor->id==$user->setor_id)
-                    <option value="{{$setor->id}}" selected="">{{$setor->nome}}</option>
-                    @else
                     <option value="{{$setor->id}}">{{$setor->nome}}</option>
-                    @endif
                     @endforeach                 
                   </select>
                 </div>

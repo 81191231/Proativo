@@ -75,6 +75,7 @@
                 <li><a><i class="fa fa-home"></i> Inicio <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="{{URL::asset('/')}}">Pagina Inicial</a></li>
+                    <li><a href="{{URL::asset('/')}}">Área do Emitente</a></li>
                     <li><a href="#">Sair</a></li>
                   </ul>
                 </li>

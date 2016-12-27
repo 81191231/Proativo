@@ -8,7 +8,7 @@ use PROATIVO\Emitente;
 class Protocolo extends Model
 {
     //
-    protected $fillable = ['status','recebedor','data_hora_recebimento','motivo','anexo_comprovante', 'user_id','tipo_documento','destinatario_id'];
+    protected $fillable = ['status','recebedor','data_hora_recebimento','motivo','anexo_comprovante', 'user_id','tipo_documento','descricao','alterador','destinatario_id'];
     //
 
     public function tipo_documentos(){

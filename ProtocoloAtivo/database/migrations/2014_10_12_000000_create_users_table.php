@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('status', ['ativo','inativo'])->default('ativo');
             $table->string('name');
             $table->string('setor')->default('Não definido');
             $table->string('email')->unique();

@@ -14,14 +14,14 @@ class AdmController extends Controller{
 	} 
 
     //User Method's
-    public function listarUserGet(){
-    	$users = User::all();
+	public function listarUserGet(){
+		$users = User::all();
 		
-    	if(empty($users)){
-    		$msg = 'Nenhum_emitente_existente';
-    	}
-    	return view('adm.user.listar',compact('users','msg'));
-    }
+		if(empty($users)){
+			$msg = 'Nenhum_emitente_existente';
+		}
+		return view('adm.user.listar',compact('users','msg'));
+	}
 
 	public function blockUser($id){
 		$user = User::find($id);
@@ -34,11 +34,17 @@ class AdmController extends Controller{
 		
 	}
 	
-	public function storeUserPost(Request $data){
-        User::create($data->all());
-        $msg = 'Cadastrado';        
-		return redirect()->action('AdmController@listarUserGet', ['msg' => $msg]);
-    }
+	public function storeUserPost(Request $request){
+		$user = User::where('email',$request->get('email'));
+		if ($user==null) {
+			User::create($request->all());
+			$msg = 'cadastrado';        
+		}else{
+			$msg = 'user_existente';
+		}
+		$setors = Setor::all();
+		return view('adm.user.novo',compact('msg','setors'));	
+	}
 
 	public function novoUserGet(){
 		$setors = Setor::all();
@@ -47,12 +53,8 @@ class AdmController extends Controller{
 
 	public function editarUserGet($id){
 		$user = User::find($id);
-		if(!empty($user)){
-			return view('adm.user.editar',compact('user'));
-		}else{
-
-		}
-		return;
+		$setors = Setor::all();
+		return view('adm.user.editar',compact('user','setors'));
 	}
 
 	public function editarUserPost(Request $request,$id){
@@ -68,12 +70,12 @@ class AdmController extends Controller{
 
 	// Setor Method's
 	public function listarSetorGet(){
-    	$setors = Setor::all();
-    	if(empty($setors)){
-    		$msg = 'Nenhum_emitente_existente';
-    	}
-    	return view('adm.Setor.listar',compact('setors','msg'));
-    }
+		$setors = Setor::all();
+		if(empty($setors)){
+			$msg = 'Nenhum_emitente_existente';
+		}
+		return view('adm.Setor.listar',compact('setors','msg'));
+	}
 
 	public function blockSetor($id){
 		$setor = Setor::find($id);
@@ -86,25 +88,28 @@ class AdmController extends Controller{
 		
 	}
 	
-	public function storeSetorPost(Request $data){
-        Setor::create($data->all());
-        $msg = 'Cadastrado';
-		return redirect()->action('AdmController@listarSetorGet', ['msg' => $msg]);
-    }
+	public function storeSetorPost(Request $request){
+		$setor = Setor::where('nome','=',$request->get('nome'));
+		if($setor==null) {
+			Setor::create($request->all());
+			$msg = 'cadastrado';	
+		}else{
+			$msg = 'setor_existente';
+		}
+		return view('adm.setor.novo', compact('msg'));
+	}
 
 	public function novoSetorGet(){
 		$setors = Setor::all();
 		return view('adm.Setor.novo',compact('setors'));
 	}
 
-	public function editarSetorGet($id){
-		$setor = Setor::find($id);
-		if(!empty($setor)){
-			return view('adm.setor.editar',compact('setor'));
-		}else{
-			$msg = 'setor_inexistente';
+	public function listarSetorUsersGet($id){
+		$users = User::where('setor_id',$id);
+		if(empty($users)){
+			$msg = 'n_user';
 		}
-		return;
+		return view('adm.setor.listarsetorUser',compact('users','msg'));
 	}
 
 	public function editarSetorPost(Request $request,$id){

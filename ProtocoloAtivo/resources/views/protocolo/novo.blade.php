@@ -80,7 +80,7 @@
           @if(!empty($tipo_documentos))
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Tipo_documento"><a href="{{URL::asset('Tipo_Documento/Novo')}}">Documento:</a></label> <div class="chosen-container chosen-container-multi" title="">
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select data-placeholder="Digite um documento" name="tipo_documento[]" class="chosen-select" multiple style="width:580px;">
+            <select data-placeholder="Digite um documento" name="tipo_documento[]" class="chosen-select" multiple style="width:580px;" required>
               @foreach($tipo_documentos as $tipo_documento)
               <option value="{{$tipo_documento->nome}}">{{$tipo_documento->nome}}</option>
               @endforeach
@@ -92,6 +92,15 @@
         <div id="modal" class="alert alert-danger" role="alert">Nenhum tipo de documento existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
         @endif
       </div>
+
+      <!--Adicionar Documento -->
+        <div class="item form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Tipo_documento">Descrição:</label> <div class="chosen-container chosen-container-multi" title="">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <textarea name="descricao" rows="3" style="width:580px;" required></textarea>
+          </div>
+        </div>
+
       <div class="ln_solid"></div>
       <div class="form-group">
         <div class="col-md-6 col-md-offset-3">

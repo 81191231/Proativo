@@ -240,9 +240,9 @@ body
 			<div class="clearfix colelem" id="u113-4">
 				<p id="u113-2">DOCUMENTO(S): {{$protocolo->tipo_documento}}</p>
 			</div>
-			<!--<div class="clearfix colelem" id="u115-4">
-				<p id="u115-2">DESCRIÇÃO ANALÍTICA DO DOCUMENTO: </p>
-			</div>-->
+			<div class="clearfix colelem" id="u115-4">
+				<p id="u115-2">DESCRIÇÃO ANALÍTICA DO DOCUMENTO: {{$protocolo->descricao}}</p>
+			</div>
 			<div class="colelem" id="u116"></div>
 			<div class="clearfix colelem" id="pu118-8">
 				<div class="clearfix grpelem" id="u118-8">

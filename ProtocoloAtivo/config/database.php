@@ -41,6 +41,8 @@ return array(
         'sqlite' => array(
             'driver'   => 'sqlite',
             'database' =>  storage_path().'/database.sqlite',
+            'charset'=> 'utf8',
+            'collation' => 'utf8_unicode_ci',
             'prefix'   => '',
         ),
         'mysql' => array(

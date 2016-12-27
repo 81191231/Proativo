@@ -11,10 +11,16 @@
       <div class="title_right">
         <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
           <div class="input-group">
-            <input class="form-control" type="text" placeholder="Pesquisar por...">
+          <form action="{{URL::to('Destinatario/Lista')}}" method="">
+          <select data-placeholder="Digite um documento" name="destinatario_id" class="chosen-select" class="form-control" style="height:; width:auto;">
+                  @foreach($destinatarios as $destinatario)
+                  <option value="{{$destinatario->id}}">{{$destinatario->razao_social}} - {{$destinatario->cnpj}}</option>
+                  @endforeach
+          </select>
             <span class="input-group-btn">
               <button class="btn btn-default" type="button">Ok</button>
             </span>
+            </form>
           </div>
         </div>
       </div>
@@ -55,6 +61,7 @@
                   <tr role="row">
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Nome</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Razão Social</th>
+                    <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">CNPJ</th>
                     <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 23,9%;"  rowspan="1" colspan="1">Ações</th>
                   </tr>
                 </thead>
@@ -67,6 +74,7 @@
                   <tr class="odd" role="row">
                     <td>{{$destinatario->nome}}</td>
                     <td>{{$destinatario->razao_social}}</td>
+                    <td>{{$destinatario->cnpj}}</td>
                     <td><a href="{{URL::to('Destinatario/'.$destinatario->id.'/Editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">Editar</a>
                       <a class="btn btn-success" href="{{URL::to('Destinatario/'.$destinatario->id.'/Protocolos')}}" data-toggle="tooltip" data-placement="top" title="Protocolos Gerados">Protocolos gerados</a>
                     </td> 

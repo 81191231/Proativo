@@ -15,11 +15,15 @@
 Route::controllers(['auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController']); 
 
 Route::get('/', function () {
-    return view('login');
+    return view('bemvindo');
 });
 //
 Route::get('Login', function () {
     return view('login');
+});
+//
+Route::get('Local/Emitente',function(){
+return view('bemvindo');
 });
 //
 Route::post('Log','LoginController@login');
@@ -83,7 +87,9 @@ Route::get('Novo','DestinatarioController@novo');
 
 Route::post('Store','DestinatarioController@store');
 
-Route::get('Buscar','DestinatarioController@buscar');
+Route::get('Lista','DestinatarioController@destinatarioGet');
+
+Route::get('{id}/Protocolos','ProtocoloController@protocolosDestinatarioGet');
 
 Route::get('{id}/Editar','DestinatarioController@editar');
 
@@ -132,7 +138,7 @@ Route::post('Store/Setor','AdmController@storeSetorPost');
 
 Route::post('Buscar/Setor','AdmController@buscarSetorPost');
 
-Route::get('Editar/{id}/Setor','AdmController@editarSetorGet');
+Route::get('Setor/{id}/Users','AdmController@listarSetorUsersGet');
 
 Route::post('Update/{id}/Setor','AdmController@editarSetorPost');
 

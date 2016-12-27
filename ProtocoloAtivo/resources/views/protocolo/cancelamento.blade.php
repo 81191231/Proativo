@@ -54,7 +54,7 @@
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Destinatario">Destinatário:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="destinatario" value="{{$protocolo->destinatario->nome}}" required="required" disabled="disabled">
+            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="destinatario" value="{{$protocolo->destinatario->razao_social}}" required="required" disabled="disabled">
           </div>
         </div>
 
@@ -79,6 +79,23 @@
           </div>
         </div>
 
+          <div class="item form-group">
+            @if(!empty($users))
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente"><a href="{{URL::asset('Emitente/Novo')}}">Alterador:</a></label>
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="" name="user_id" class="chosen-select"style="width:580px;">
+                  @foreach($users as $user)
+                  <option value="{{$user->id}}">{{$user->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <span class="required">*</span>
+            @else
+            <div id="modal" class="alert alert-danger" role="alert">Nenhum emitente existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            @endif
+          </div>
         <div class="ln_solid"></div>
         <div class="form-group">
           <div class="col-md-6 col-md-offset-3">

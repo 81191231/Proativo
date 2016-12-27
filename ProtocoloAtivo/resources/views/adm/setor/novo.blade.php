@@ -24,7 +24,16 @@
           <div class="clearfix"></div>
         </div>
         @if(!empty($msg))
-        {!! $msg !!}
+        @if($msg=="cadastrado")
+        <div class="alert alert-success" role="alert">Setor cadastrado com sucesso!
+          <a href="{{URL::to('Adm/Listar/Setor')}}" class="alert-link">Ver lista de setores!</a>
+        </div>
+        @else
+        
+        <div class="alert alert-warning" role="alert">Já existe um setor cadastrado com esse nome!
+          <a href="{{URL::to('Adm/Listar/Setor')}}" class="alert-link">Ver setor!</a>
+        </div>
+        @endif
         @else
         @endif
         <div class="x_content">
@@ -41,18 +50,18 @@
             </div>
           </div>
 
-        <div class="ln_solid"></div>
-        <div class="form-group">
-          <div class="col-md-6 col-md-offset-3">
-           <button id="send" type="submit" class="btn btn-primary">Limpar</button>
-           {!! Form::submit('Cadastrar', ['class'=>'btn btn-success']) !!} 
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-6 col-md-offset-3">
+             <button id="send" type="submit" class="btn btn-primary">Limpar</button>
+             {!! Form::submit('Cadastrar', ['class'=>'btn btn-success']) !!} 
+           </div>
          </div>
        </div>
+       {!! Form::close() !!} 
      </div>
-     {!! Form::close() !!} 
    </div>
  </div>
-</div>
 </div>
 </div>
 </div>

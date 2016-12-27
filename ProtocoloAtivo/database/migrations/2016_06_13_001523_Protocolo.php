@@ -23,6 +23,8 @@ class Protocolo extends Migration
         $table->json('tipo_documento');
         $table->string('anexo_comprovante')->default('Nenhum Documento anexado');
         $table->string('data_hora_recebimento')->default('Documento ainda não foi entregue!');
+        $table->string('descricao')->nullable();
+        $table->string('alterador')->nullable();
         $table->string('motivo')->default('nenhum');
         $table->timestamps();
     }); 

@@ -85,7 +85,7 @@
                     @endif
                       <td>
                         @if($protocolo->status=="Emitido")
-                        <span class="glyphicon glyphicon-comment" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Emitido"></span>
+                        <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Emitido"><i class="fa fa-circle-o"></i></span>
                         @elseif($protocolo->status=="Entregue")
                         <span class="glyphicon glyphicon-check" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Entregue"></span>
                         @else
@@ -97,9 +97,9 @@
                       <td>{{$protocolo->tipo_documento}}</td>
                       <td>{{$protocolo->recebedor}}</td>
                       <td>{{$protocolo->created_at}}</td>
-                      <td>{{$protocolo->data_hora_recebimento}}</td>
+                      <td>{{$protocolo->updated_at}}</td>
                       @if($protocolo->status=="Entregue")
-                      <td><a href="{{URL::to('Protocolo/'.$protocolo->id.'/Anexo')}}">Ver Anexo</a></td>
+                      <td>{{$protocolo->anexo_comprovante}}<!--<a href="{{URL::to('Protocolo/'.$protocolo->id.'/Anexo')}}">Ver Anexo</a>--></td>
                       @else
                       <td>{{$protocolo->anexo_comprovante}}</td>
                       @endif

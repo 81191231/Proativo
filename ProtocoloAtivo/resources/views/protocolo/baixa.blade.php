@@ -6,6 +6,8 @@ function myFunction() {
     x.setAttribute("type", "file");
     x.disabled = true;
 }
+var today = new Date();
+document.getElementById("date").value = today;
 </script>
 <div class="right_col" role="main">
   <div class="">
@@ -35,9 +37,11 @@ function myFunction() {
          <div class="clearfix"></div>
        </div>
        <div class="x_content">
-        {!! Form::open(['url'=>'Protocolo/'.$protocolo->id.'/Baixar'])!!}
+        <!-- -->
+        <form method="post" action="{{URL::to('Protocolo/'.$protocolo->id.'/Baixar')}}"  enctype="multipart/form-data">
+        <!-- -->
         <div class="form-horizontal form-label-left" novalidate>
-
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         </p>
         <span class="section">Inserir informações</span>
 
@@ -86,7 +90,7 @@ function myFunction() {
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Data_de_entrega">Data de Entrega:</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="data_hora_recebimento" value="{{$protocolo->data_hora_recebimento}}" required="required">
+            <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="data_hora_recebimento" value="" id="date" required="required">
           </div>
         </div>
 
@@ -96,7 +100,7 @@ function myFunction() {
             <input type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="recebedor" value="{{$protocolo->recebedor}}" required="required">
           </div>
         </div>
-        
+
         <div class="item form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Inserir Documento:</label>
           <div class="col-md-6 col-sm-6 col-xs-12"> 
@@ -104,6 +108,24 @@ function myFunction() {
           </div>
           <span style="font-size:10px;">Tamanha máximo do arquivo: 4mb</span>
         </div>
+
+          <div class="item form-group">
+            @if(!empty($users))
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emitente"><a href="{{URL::asset('Emitente/Novo')}}">Emitente:</a></label>
+             <div class="chosen-container chosen-container-multi" title="">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <select data-placeholder="" name="alterador" class="chosen-select"style="width:580px;">
+                  @foreach($users as $user)
+                  <option value="{{$user->id}}">{{$user->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <span class="required">*</span>
+            @else
+            <div id="modal" class="alert alert-danger" role="alert">Nenhum emitente existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            @endif
+          </div>
 
         <div class="ln_solid"></div>
         <div class="form-group">
@@ -114,7 +136,7 @@ function myFunction() {
           </div>
         </div>
       </div>
-      {!!Form::close()!!}
+      </form>
     </div>
   </div>
 </div>

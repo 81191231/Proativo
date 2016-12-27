@@ -65,7 +65,7 @@
                 <!--linha da Tabela-->
                 <tr class="odd" role="row">
                   <td>{{$setor->nome}}</td>
-                  <td><a href="{{URL::to('Adm/Editar/'.$setor->id.'/Setor')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">Editar</a>
+                  <td><a href="{{URL::to('Adm/Setor/'.$setor->id.'/Users')}}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Usuários"><span class="glyphicon glyphicon-user"></span></a>
                   </td> 
                 </tr>
                 <!--Fim linha da Tabela-->

@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" manifest="demo.appcache">
   <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +33,7 @@
   </style>
 </head>
 
-<body class="nav-md">
+<body class="nav-md" ng-app="myApp">
 
 
   <div class="container body">
@@ -96,12 +95,12 @@
                   <li><a href="{{URL::asset('Setor/Listar')}}" alt="Listar Setor" accesskey="" data-toggle="tooltip" data-placement="right" title="">Listar</a></li>
                 </ul>
               </li>
-              -->
+            -->
 
-              <!--Menu do Destino-->
-              <li><a><i class="fa fa-location-arrow"></i>Destinatário <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <li><a href="{{URL::asset('Destinatario/Novo')}}" alt="Novo Destinatário" accesskey="D" data-toggle="tooltip" data-placement="right" title="Alt+D">Novo</a></li>
+            <!--Menu do Destino-->
+            <li><a><i class="fa fa-location-arrow"></i>Destinatário <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{URL::asset('Destinatario/Novo')}}" alt="Novo Destinatário" accesskey="D" data-toggle="tooltip" data-placement="right" title="Alt+D">Novo</a></li>
                     <!--
                     <li><a href="{{URL::asset('Destinatario/Buscar')}}" alt="Editar Destinatário" accesskey="" data-toggle="tooltip" data-placement="right" title="alt+8">Buscar</a></li>
                   -->
@@ -199,8 +198,8 @@
       </footer>
       <!-- /footer content -->
     </div>
-
-
+    
+    <!--Jquery -->
     <script src="{{URL::asset('lib/jquery/dist/jquery.min.js')}}" type="text/javascript"></script>
     <!-- Bootstrap -->
     <script src="{{URL::asset('lib/bootstrap/dist/js/bootstrap.min.js')}}" type="text/javascript"></script>
@@ -222,6 +221,17 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{URL::asset('lib/build/js/custom.min.js')}}" type="text/javascript"></script>
+
+    <script src="{{URL::asset('lib/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js')}}"></script>
+
+
+<!-- jquery.inputmask -->
+    <script>
+      $(document).ready(function() {
+        $(":input").inputmask();
+      });
+    </script>
+    <!-- /jquery.inputmask -->
 
     <!-- Flot -->
     <script>
@@ -501,5 +511,7 @@
         $(selector).chosen(config[selector]);
       }
     </script>
+    <!-- Vue.js 
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>-->
   </body>
   </html>

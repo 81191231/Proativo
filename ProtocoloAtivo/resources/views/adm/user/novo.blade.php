@@ -24,7 +24,15 @@
           <div class="clearfix"></1div>
           </div>
           @if(!empty($msg))
-            {!! $msg !!}
+            @if($msg==="cadastrado")      
+              <div class="alert alert-success" role="alert">Usuário cadastrado com sucesso! 
+                <a href="{{URL::to('Adm/Listar/Emitente')}}" class="alert-link">Ver a lista de usuários!</a>
+              </div>
+            @else
+              <div class="alert alert-warning" role="alert">Já existe um usuário com o email fornecido!
+                <a href="{{URL::to('Adm/Listar/Emitente')}}" class="alert-link">Ver usuário!</a>
+              </div>
+            @endif
           @else
           
           @endif
@@ -32,7 +40,7 @@
 
             {!! Form::open(['url'=>'Adm/Store/Emitente']) !!}  
             <div class="form-horizontal form-label-left" novalidate>
-              
+
             </p>
             <span class="section">Inserir informações</span>
             <div class="item form-group">
@@ -63,23 +71,23 @@
               <span class="required">*</span>
               @else
               <div class="item form-group">
-              <div class="alert alert-danger" role="alert">Nenhum setor existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
-              @endif
+                <div class="alert alert-danger" role="alert">Nenhum setor existente!<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                @endif
+              </div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-6 col-md-offset-3">
+                  <button id="send" type="submit" class="btn btn-primary">Limpar</button>
+                  {!! Form::submit('Cadastrar', ['class'=>'btn btn-success'],['accesskey'=>'c']) !!} 
+                </div>
+              </div>
             </div>
-            <div class="ln_solid"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-md-offset-3">
-              <button id="send" type="submit" class="btn btn-primary">Limpar</button>
-              {!! Form::submit('Cadastrar', ['class'=>'btn btn-success'],['accesskey'=>'c']) !!} 
-            </div>
+            {!! Form::close() !!} 
           </div>
         </div>
-        {!! Form::close() !!} 
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
 <!--fim de Formulario-->
 @endsection

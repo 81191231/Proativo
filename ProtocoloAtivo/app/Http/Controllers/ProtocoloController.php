@@ -13,6 +13,12 @@ use Illuminate\Http\File;
 use Intervention\Image\Facades\Image;
 class ProtocoloController extends Controller{
 	
+	protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+
 	public function anexoGet($id){
 		$protocolo = Protocolo::find($id);
 		$anexo = $protocolo->anexo_comprovante;
@@ -25,23 +31,18 @@ class ProtocoloController extends Controller{
 		return view('protocolo.listar',compact('protocolos'));	
 	}
 
-	public function baixaPost(Request $request,$id){
+	public function baixaPost(Request $request,$id, \Illuminate\Contracts\Filesystem\Factory $fs){
 		$protocolo = Protocolo::find($id);
-		if($request->hasFile('anexo_comprovante') && $request->file('anexo_comprovante')->isValid()){
-		$anexo = $request->file('anexo_comprovante');
-		$pathToFile = '/Protocolo/Anexo/'.$protocolo->id.'-protocolo.jpg';
-		Storage::put($pathToFile, $anexo);
-		Protocolo::find($id)->update(['status'=>$request['status'],'anexo_comprovante'=>$pathToFile,'dada_hora_recebimento'=>$request['data_hora_recebimento'],'recebedor'=>$request['recebedor']]);
-		}else{
-			$msg = 'Arquivo Inválido!';
-			return view('protocolo.baixa',compact('msg','protocolo'));
-		}
+		$diskCloud = $fs->disk('public');
+		$diskCloud->put($protocolo->id."Anexo".$protocolo->created_at."-Protocolo.jpg",$request->get('anexo_comprovante'));
+		Protocolo::find($id)->update(['status'=>$request['status'],'anexo_comprovante'=>$protocolo->id."Anexo".$protocolo->created_at."-Protocolo.jpg",'dada_hora_recebimento'=>$request['data_hora_recebimento'],'recebedor'=>$request['recebedor'],'alterador'=>$request['alterador'],'descricao'=>$request['descricao']]);
 		return redirect()->action('ProtocoloController@listar');
 	}
 	
 	public function baixaGet($id){
 		$protocolo = Protocolo::find($id);
-		return view('protocolo.baixa',compact('protocolo'));
+		$users = User::all();
+		return view('protocolo.baixa',compact('protocolo','users'));
 	}
 
 	public function novo(){
@@ -70,7 +71,8 @@ class ProtocoloController extends Controller{
 
 	public function cancelarGet($id){
 		$protocolo = Protocolo::find($id);
-		return view('protocolo.cancelamento', compact('protocolo'));
+		$users = User::all();
+		return view('protocolo.cancelamento', compact('protocolo','<users></users>'));
 	}
 	
 	public function cancelarPost($id){
@@ -87,6 +89,11 @@ class ProtocoloController extends Controller{
 			return redirect()->action('ProtocoloController@listar');
 		}
 		return;
+	}
+
+	public function protocolosDestinatarioGet($id){
+		$protocolos = Protocolo::all()->where('destinatario_id',$id);
+		return view('destinatario.protocolos',compact('protocolos'));
 	}
 
 }

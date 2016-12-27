@@ -17,6 +17,7 @@ class Destinatario extends Migration
         $table->increments('id');
         $table->string('nome', 30);
         $table->string('razao_social',60);
+        $table->integer('cnpj')->unique();
         $table->timestamps();
     });    
     }
